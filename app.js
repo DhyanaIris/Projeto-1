@@ -29,3 +29,5 @@ app.get('/admin', (req, res) => {
 app.listen(3000, function() {
   console.log("Servidor online na porta 3000");
 })
+
+// Rodar servidor npx nodemon app.js
