@@ -37,6 +37,7 @@ app.listen(3000, function() {
   console.log("Servidor online na porta 3000");
 })
 
+
 app.post('/cadastro', (req, res) => {
   // Receba os dados do formulário
   const novoArtigo = req.body;
@@ -64,3 +65,6 @@ app.post('/cadastro', (req, res) => {
   // Redireciona de volta para pagina de cadastro
   res.redirect('/createArticle');
   });
+
+// Rodar servidor npx nodemon app.js
+
