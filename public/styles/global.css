@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Barlow', sans-serif;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+main {
+  min-height: calc(100vh - 100px);
+}
+
+/* Header e Footer */
+header,
+footer {
+  width: 100%;
+  padding: 30px 0;
+  background-color: #FFF;
+}
+
+header {
+  box-shadow: 1px 1px 20px #000;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  margin-left: 5%;
+}
+
+/* .logo img {
+  max-width: 10%;
+} */
+
+.logo h1 {
+  font-size: x-large;
+}
+
+#event {
+  color: #A876E6;
+  margin-left: 5px;
+}
+
+.navContainer {
+  width: 50%;
+}
+
+.navContainer nav ul {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 10%;
+}
+
+.navContainer nav ul li {
+  position: block;
+  margin: 0 20px;
+  font-size: 1.3rem;
+  font-weight: 400;
+  transition: 0.3s;
+}
+
+/* Para fazer o efeito de linha no hover */
+.navContainer nav ul li:hover {
+  color: #A876E6;
+  font-weight: 500;
+  letter-spacing: 0.7px;
+}
+
+.navContainer nav ul li:after {
+  content: '';
+  display: block;
+  border-bottom: solid 2px #A876E6;
+  border-radius: 2px;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.navContainer nav ul li:hover:after {
+  transform: scaleX(1);
+}
+
+/* Footer */
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 150px;
+  position: relative;
+  bottom: 0;
+  border-top: 1px solid #ddd;
+  /* box-shadow: 1px 1px 20px #000; */
+}
+
+footer p {
+  margin-top: 30px;
+  font-size: 1.2rem;
+}
+
+.midiaContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}

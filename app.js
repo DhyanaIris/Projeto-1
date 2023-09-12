@@ -6,27 +6,29 @@ const authenticator = require('./middlewares/authenticator');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/', express.static('index.html'));
-app.use('/login', express.static('login.html'));
-app.use('/createArticle', express.static('createArticle.html'));
-app.use('/admin', express.static('admin.html'));
+app.use(express.static('public'));
+// app.use(express.static('views'));
+// app.use('/', express.static('index.html'));
+// app.use('/login', express.static('login.html'));
+// app.use('/createArticle', express.static('createArticle.html'));
+// app.use('/admin', express.static('admin.html'));
 
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/views/index.html')
+  res.sendFile(__dirname + '/public/views/home.html')
 })
 
 app.get('/createArticle', (req, res) => {
-  res.sendFile(__dirname + '/views/createArticle.html')
+  res.sendFile(__dirname + '/public/views/createArticle.html')
 })
 
 app.get('/login', (req, res) => {
-  res.sendFile(__dirname + '/views/login.html')
+  res.sendFile(__dirname + '/public/views/login.html')
 })
 
 // Usa o middleware de autenticação
 app.post('/login', authenticator, (req, res) => { 
-  res.redirect('/admin'); 
+  res.redirect('public/views/admin.html'); 
 });
 
 app.get('/admin', (req, res) => {
