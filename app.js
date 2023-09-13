@@ -2,6 +2,11 @@ const express = require('express');
 const app = express();
 const fs = require('fs');
 const authenticator = require('./middlewares/authenticator');
+const ejs = require('ejs');
+const path = require('path');
+const uuid = require('uuid');
+const updateLikeCount = require('./middlewares/liked_counter');
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -13,9 +18,25 @@ app.use(express.static('public'));
 // app.use('/createArticle', express.static('createArticle.html'));
 // app.use('/admin', express.static('admin.html'));
 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './public/views'));
+
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/views/home.html')
+  let likedArticles = [];
+  let featuredArticles = [];
+  if(fs.existsSync('./data/articles.json')){
+    try{
+      const data = fs.readFileSync('./data/articles.json', 'utf8');
+      likedArticles = JSON.parse(data);
+      featuredArticles = JSON.parse(data);
+
+      likedArticles.sort((a, b) => b.kb_liked_count - a.kb_liked_count);
+    } catch(error) {
+      console.error('Erro ao analisar o arquivo JSON', error);
+    }
+  }
+  res.render('home', {likedArticles, featuredArticles});
 })
 
 app.get('/createArticle', (req, res) => {
@@ -44,7 +65,10 @@ app.post('/cadastro', (req, res) => {
   // Receba os dados do formulário
   const novoArtigo = req.body;
 
+  novoArtigo.kb_id = uuid.v4();
+  novoArtigo.kb_permalink = novoArtigo.kb_title;
   novoArtigo.kb_liked_count = 0;
+  novoArtigo.kb_published_date = new Date().toLocaleDateString();
   novoArtigo.kb_published = true; 
   novoArtigo.kb_suggestion = true; 
   novoArtigo.kb_featured = true;
@@ -68,5 +92,31 @@ app.post('/cadastro', (req, res) => {
   res.redirect('/createArticle');
   });
 
-// Rodar servidor npx nodemon app.js
 
+
+//Renderiza artigo com base no ID
+app.get('/article/:id', (req, res) => {
+  const articleId = req.params.id;
+  let articlesData = [];
+
+  const data = fs.readFileSync('./data/articles.json', 'utf8');
+  articlesData = JSON.parse(data);
+
+  // Encontre o artigo com base no ID
+  const article = articlesData.find((article) => article.kb_id === articleId);
+
+  if (!article) {
+    return res.status(404).send('Artigo não encontrado');
+  }
+  res.render('article', { article });
+});
+
+
+// Atualiza o contador de like do artigo
+app.post('/article/like/:id', updateLikeCount, (req, res) => {
+  const articleId = req.params.id;
+  res.redirect(`/article/${articleId}`);
+});
+
+
+// Rodar servidor npx nodemon app.js

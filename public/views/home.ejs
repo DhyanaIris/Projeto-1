@@ -49,27 +49,31 @@
         <h1>Kpop Events</h1>
       </article>
       <section class="searchContainer">
-        <input type="text" class="searchBar" placeholder="Pesquisar">
-        <a href="#" class="searchBtn">
+        <input type="text" class="searchBar" id="searchInput" placeholder="Pesquisar">
+        <a href="#" class="searchBtn" id="searchButton">
           <img src="../img/lupa.svg" alt="Lupa">
         </a>
       </section>
       <section class="container">
         <article class="subTitle">
-          <h2>Últimas publicações</h2>
+          <h2>Publicações em Destaque</h2>
         </article>
         <section class="groupContainer">
-          <section class="newsContainer">
-            <section class="imgContainer">
-              <img src="../img/bg.jpg" alt="" class="">
+            <% featuredArticles.forEach(article => { %>
+              <% if (article.kb_featured) { %>
+            <section class="newsContainer">
+              <section class="imgContainer">
+                <img src="../img/bg.jpg" alt="" class="">
+              </section>
+              <a href="/article/<%= article.kb_id %>">
+                <article class="infoContainer">
+                  <h3><%= article.kb_title %></h3>
+                  <p><%= article.kb_summary %></p>
+                </article>
+              </a>
             </section>
-            <a href="#" target="_blank">
-              <article class="infoContainer">
-                <h3>TWICE READY TO BE TOUR BRAZIL</h3>
-                <p>Anunciado show do girl group Twice no Allianz Parque</p>
-              </article>
-            </a>
-          </section>
+              <% }; %>
+            <% }); %>
           <section class="newsContainer">
             <section class="imgContainer">
               <img src="../img/bg.jpg" alt="" class="">
@@ -88,17 +92,19 @@
           <h2>Publicações Mais Curtidas</h2>
         </article>
         <section class="groupContainer">
+          <% likedArticles.forEach(article => { %>
           <section class="newsContainer">
             <section class="imgContainer">
               <img src="../img/bg.jpg" alt="" class="">
             </section>
-            <a href="#" target="_blank">
+            <a href="/article/<%= article.kb_id %>">
               <article class="infoContainer">
-                <h3>RED VELVET RtoV TOUR EUROPE</h3>
-                <p>Confirmado datas dos shows do girl group Red Velvet na Europa</p>
+                <h3><%= article.kb_title %></h3>
+                <p><%= article.kb_summary %></p>
               </article>
             </a>
           </section>
+          <% }); %>
         </section>
       </section>
     </section>

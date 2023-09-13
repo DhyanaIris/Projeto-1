@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../styles/global.css">
+  <!-- <link rel="stylesheet" type="text/css" href="../styles/home.css"> -->
+  <script src="../app.js" defer></script>
+  <title>Projeto 1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+
+<body>
+  <header>
+    <section class="headerContainer">
+      <section class="logo">
+        <img src="" alt="">
+        <h1>KPOP</h1>
+        <h1 id="event">EVENT</h1>
+      </section>
+      <section class="navContainer">
+        <nav>
+          <ul>
+            <a href="/">
+              <li>
+                Home
+              </li>
+            </a>
+            <a href="/login">
+              <li>
+                Login
+              </li>
+            </a>
+            <a href="/createArticle">
+              <li>
+                Cadastro de Artigo
+              </li>
+            </a>
+          </ul>
+        </nav>
+      </section>
+    </section>
+  </header>
+  <main>
+    <h3><%=article.kb_title%></h3>
+    <span><%=article.kb_body%></span>
+    <span><%=article.kb_published_date%></span>
+    <span><%=article.kb_author_email%></span>
+    <form action="/article/like/<%= article.kb_id %>" method="POST">
+        <button type="submit">Like</button>
+    </form>
+  </main>
+  <footer>
+    <section class="midiaContainer">
+      <a href="#" target="_blank">
+        p
+        <img src="" alt="">
+      </a>
+      <a href="#" target="_blank">
+        p
+        <img src="" alt="">
+      </a>
+      <a href="#" target="_blank">
+        p
+        <img src="" alt="">
+      </a>
+    </section>
+    <p>Todos os direitos reservados 2023</p>
+  </footer>
+</body>
+
+</html>

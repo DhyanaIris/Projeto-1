@@ -1,0 +1,30 @@
+[
+  {
+    "kb_title": "Teste 1",
+    "kb_summary": "Resumo ",
+    "kb_body": "Conteudo",
+    "kb_keywords": "chave1, chave2",
+    "kb_author_email": "teste@gmail.com",
+    "kb_id": "89cfaf8e-9196-4770-b31d-c1a6f393f7e4",
+    "kb_permalink": "Teste 1",
+    "kb_liked_count": 0,
+    "kb_published_date": "13/09/2023",
+    "kb_published": true,
+    "kb_suggestion": true,
+    "kb_featured": true
+  },
+  {
+    "kb_title": "Teste 2",
+    "kb_summary": "Resumo ",
+    "kb_body": "Conteudo",
+    "kb_keywords": "chave3, chave4",
+    "kb_author_email": "teste2@gmail.com",
+    "kb_id": "89cfaf8e-9196-4770-b31d-c1a6f393f7e42",
+    "kb_permalink": "Teste 2",
+    "kb_liked_count": 0,
+    "kb_published_date": "13/09/2023",
+    "kb_published": true,
+    "kb_suggestion": true,
+    "kb_featured": true
+  }
+]
