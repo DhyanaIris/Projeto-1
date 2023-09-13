@@ -60,6 +60,23 @@ app.listen(3000, function() {
   console.log("Servidor online na porta 3000");
 })
 
+function ordenarProps(obj) {
+  const objOrdenado = {};
+  objOrdenado.kb_id = obj.kb_id;
+  objOrdenado.kb_title = obj.kb_title;
+  objOrdenado.kb_summary = obj.kb_summary;
+  objOrdenado.kb_body = obj.kb_body;
+  objOrdenado.kb_keywords = obj.kb_keywords;
+  objOrdenado.kb_author_email = obj.kb_author_email;
+  objOrdenado.kb_permalink = obj.kb_permalink;
+  objOrdenado.kb_published_date = obj.kb_published_date;
+  objOrdenado.kb_published = obj.kb_published;
+  objOrdenado.kb_suggestion = obj.kb_suggestion;
+  objOrdenado.kb_liked_count = obj.kb_liked_count;
+  objOrdenado.kb_featured = obj.kb_featured;
+  return objOrdenado;
+}
+
 
 app.post('/cadastro', (req, res) => {
   // Receba os dados do formulário
@@ -71,7 +88,13 @@ app.post('/cadastro', (req, res) => {
   novoArtigo.kb_published_date = new Date().toLocaleDateString();
   novoArtigo.kb_published = true; 
   novoArtigo.kb_suggestion = true; 
-  novoArtigo.kb_featured = true;
+  if (req.body.kb_featured === 'true') {
+    novoArtigo.kb_featured = true;
+  } else {
+    novoArtigo.kb_featured = false;
+  }
+
+  const artigoOrdenado = ordenarProps(novoArtigo);
 
   // Carregue os artigos existentes (se houver)
   let articles = [];
@@ -84,7 +107,8 @@ app.post('/cadastro', (req, res) => {
     }
   }
   // Adicione o novo artigo à lista de artigos
-  articles.push(novoArtigo);
+  articles.push(artigoOrdenado);
+
   // Salva a lista de artigos no arquivo JSON
   fs.writeFileSync('./data/articles.json', JSON.stringify(articles,null, 2));
 

@@ -48,6 +48,7 @@
     <span><%=article.kb_body%></span>
     <span><%=article.kb_published_date%></span>
     <span><%=article.kb_author_email%></span>
+    <span><%=article.kb_liked_count%></span>
     <form action="/article/like/<%= article.kb_id %>" method="POST">
         <button type="submit">Like</button>
     </form>
