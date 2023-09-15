@@ -33,9 +33,9 @@
                 Login
               </li>
             </a>
-            <a href="/createArticle">
+            <a href="/admin">
               <li>
-                Cadastro de Artigo
+                Admin
               </li>
             </a>
           </ul>
@@ -49,6 +49,7 @@
     <span><%=article.kb_published_date%></span>
     <span><%=article.kb_author_email%></span>
     <span><%=article.kb_liked_count%></span>
+    <img src="<%= article.kb_image%>" alt="">
     <form action="/article/like/<%= article.kb_id %>" method="POST">
         <button type="submit">Like</button>
     </form>

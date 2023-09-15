@@ -33,9 +33,9 @@
                 Login
               </li>
             </a>
-            <a href="/admin">
+            <a href="/createArticle">
               <li>
-                Admin
+                Cadastro de Artigo
               </li>
             </a>
           </ul>
@@ -61,58 +61,15 @@
         </a> -->
       </section>
       <section class="container">
-        <article class="subTitle">
-          <h2>Publicações em Destaque</h2>
-        </article>
-        <section class="groupContainer">
-            <% featuredArticles.forEach(article => { %>
-              <% if (article.kb_featured) { %>
-            <section class="newsContainer">
-              <section class="imgContainer">
-                <img src="../img/bg.jpg" alt="" class="">
-              </section>
-              <a href="/article/<%= article.kb_id %>">
-                <article class="infoContainer">
-                  <h3><%= article.kb_title %></h3>
-                  <p><%= article.kb_summary %></p>
-                </article>
-              </a>
-            </section>
-              <% }; %>
-            <% }); %>
-          <section class="newsContainer">
-            <section class="imgContainer">
-              <img src="../img/bg.jpg" alt="" class="">
-            </section>
-            <a href="#" target="_blank">
-              <article class="infoContainer">
-                <h3>TWICE READY TO BE TOUR BRAZIL</h3>
-                <p>Anunciado show do girl group Twice no Allianz Parque</p>
-              </article>
-            </a>
-          </section>
-        </section>
-      </section>
-      <section class="container">
-        <article class="subTitle">
-          <h2>Publicações Mais Curtidas</h2>
-        </article>
-        <section class="groupContainer">
-          <% likedArticles.forEach(article => { %>
-          <section class="newsContainer">
-            <section class="imgContainer">
-              <img src="../img/bg.jpg" alt="" class="">
-            </section>
-            <a href="/article/<%= article.kb_id %>">
-              <article class="infoContainer">
-                <h3><%= article.kb_title %></h3>
-                <p><%= article.kb_summary %></p>
-              </article>
-            </a>
-          </section>
-          <% }); %>
-        </section>
-      </section>
+        <h1>Resultados da Pesquisa</h1>
+    <ul>
+      <% results.forEach(article => { %>
+        <li>
+          <a href="/article/<%= article.kb_id %>"><%= article.kb_title %></a>
+          <p><%= article.kb_summary %></p>
+        </li>
+      <% }); %>
+    </ul>
     </section>
   </main>
   <footer>

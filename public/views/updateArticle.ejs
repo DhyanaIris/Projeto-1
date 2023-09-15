@@ -1,0 +1,41 @@
+<!-- updateArticle.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atualização de Artigos</title>
+</head>
+<body>
+  <a href="/admin">Voltar</a>
+  <a href="/">Home</a>
+  <h1>Atualizar Artigo: <%=articleUpdate.kb_title%></h1>
+  <form action="/article/updateArticle/<%= articleUpdate.kb_id %>" method="post" enctype="multipart/form-data">
+    <label for="kb_title">Título:</label>
+    <input type="text" id="kb_title" name="kb_title" value="<%= articleUpdate.kb_title %>" required><br>
+
+    <label for="kb_summary">Resumo:</label>
+    <input type="text" id="kb_summary" name="kb_summary" value="<%= articleUpdate.kb_summary %>" required><br>
+
+    <label for="kb_body">Conteúdo:</label>
+    <textarea id="kb_body" name="kb_body" required><%= articleUpdate.kb_body %></textarea><br>
+
+    <label for="kb_keywords">Palavras-chave:</label>
+    <input type="text" id="kb_keywords" name="kb_keywords" value="<%= articleUpdate.kb_keywords %>" required><br>
+
+    <label for="kb_author_email">Email do Autor:</label>
+    <input type="email" id="kb_author_email" name="kb_author_email" value="<%= articleUpdate.kb_author_email %>" required><br>
+
+    <label for="kb_featured">Destaque:</label>
+    <input type="checkbox" id="kb_featured" name="kb_featured" value="true" <%= articleUpdate.kb_featured ? 'checked' : '' %>><br>
+
+    <label for="kb_image">Imagem:</label>
+    <input type="file" id="kb_image" name="kb_image" accept="image/*"><br>
+
+    <!-- Exibe a imagem atual do artigo, se houver -->
+    <% if (articleUpdate.kb_image) { %>
+    <img src="<%= articleUpdate.kb_image %>" alt="Imagem atual do artigo">
+    <% } %>
+
+    <input type="submit" value="Atualizar Artigo">
+</form>
