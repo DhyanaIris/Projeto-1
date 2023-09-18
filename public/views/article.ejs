@@ -5,13 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="../styles/global.css">
-  <!-- <link rel="stylesheet" type="text/css" href="../styles/home.css"> -->
+  <link rel="stylesheet" type="text/css" href="../styles/article.css">
   <script src="../app.js" defer></script>
   <title>Projeto 1</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
-
 <body>
   <header>
     <section class="headerContainer">
@@ -43,17 +42,26 @@
       </section>
     </section>
   </header>
+
   <main>
-    <h3><%=article.kb_title%></h3>
-    <span><%=article.kb_body%></span>
-    <span><%=article.kb_published_date%></span>
-    <span><%=article.kb_author_email%></span>
-    <span><%=article.kb_liked_count%></span>
-    <img src="<%= article.kb_image%>" alt="">
-    <form action="/article/like/<%= article.kb_id %>" method="POST">
-        <button type="submit">Like</button>
-    </form>
+    <section class="container">
+      <h3><%=article.kb_title%></h3>
+      <span><%=article.kb_body%></span>
+      <section class="dados">
+        <span><%=article.kb_published_date%></span>
+        <span><%=article.kb_published_date%></span>
+        <span><%=article.kb_author_email%></span>
+      </section>
+      <section class="like">
+        <span><%=article.kb_liked_count%></span>
+        <img src="<%= article.kb_image%>" alt="">
+        <form action="/article/like/<%= article.kb_id %>" method="POST">
+          <button type="submit">Like</button>
+      </section>
+      </form>
+    </section>
   </main>
+
   <footer>
     <section class="midiaContainer">
       <a href="#" target="_blank">
