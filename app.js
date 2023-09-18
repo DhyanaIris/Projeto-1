@@ -1,9 +1,19 @@
 const express = require('express');
+const session = require('express-session');
 const app = express();
 const fs = require('fs');
 const ejs = require('ejs');
 const path = require('path');
 const routes = require('./routes')
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(session({
+  secret: 'your_secret_key',
+  resave: false,
+  saveUninitialized: true
+}));
 
 app.use('/', routes)
 app.use(express.json());

@@ -8,15 +8,30 @@
 <body>
   <h1>Admin</h1>
   <a href="/">Home</a>
+
+  <h1>Artigos</h1>
   <a href="/article/createArticle">Cadastro de Artigo</a>
   <ul>
     <% articles.forEach((article) => { %>
       <li>
-        <p><%= article.kb_title %></p>
-        <p><%= article.kb_summary %></p>
+        <p>Título: <%= article.kb_title %></p>
+        <p>Sumário: <%= article.kb_summary %></p>
         <a href="/article/<%= article.kb_id %>">Ler</a>
-        <a href="/article/updateArticle/<%= article.kb_id %>">Atualizar</a>
+        <a href="/article/updateArticle/<%= article.kb_id %>">Editar</a>
         <a href="/article/delete/<%= article.kb_id %>">Deletar</a>
+      </li>
+    <% }); %>
+  </ul>
+  <h1>Usuários</h1>
+  <a href="/users/signup">Cadastro de Usuário</a>
+  <ul>
+    <% users.forEach((user) => { %>
+      <li>
+        <p>Nome: <%= user.author_name %></p>
+        <p>Usuário: <%= user.author_user %></p>
+        <p>Email: <%= user.author_email %></p>
+        <p>Status: <%= user.author_status ? 'Ativo' : 'Desativado' %></p>
+        <a href="/users/edit/<%= user.author_id%>">Editar</a>
       </li>
     <% }); %>
   </ul>

@@ -27,14 +27,15 @@
     <input type="email" id="kb_author_email" name="kb_author_email" value="<%= articleUpdate.kb_author_email %>" required><br>
 
     <label for="kb_featured">Destaque:</label>
-    <input type="checkbox" id="kb_featured" name="kb_featured" value="true" <%= articleUpdate.kb_featured ? 'checked' : '' %>><br>
+    <input type="checkbox" id="kb_featured" name="kb_featured" <%= articleUpdate.kb_featured ? 'checked' : '' %> value="true">
 
     <label for="kb_image">Imagem:</label>
     <input type="file" id="kb_image" name="kb_image" accept="image/*"><br>
 
     <!-- Exibe a imagem atual do artigo, se houver -->
     <% if (articleUpdate.kb_image) { %>
-    <img src="<%= articleUpdate.kb_image %>" alt="Imagem atual do artigo">
+      <% const imagePath = articleUpdate.kb_image.replace('..', ''); %>
+      <img src="<%= imagePath %>" alt="Imagem atual do artigo">
     <% } %>
 
     <input type="submit" value="Atualizar Artigo">

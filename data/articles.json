@@ -9,8 +9,8 @@
     "kb_published_date": "15/09/2023",
     "kb_published": true,
     "kb_liked_count": 8,
-    "kb_image": "../img/ceb0d4ce-f104-463d-9caf-c44934d8d1da.jpg",
-    "kb_featured": "false"
+    "kb_image": "../img/5fd4740b-f977-4f8a-b427-b208b11c1d1f.jpg",
+    "kb_featured": true
   },
   {
     "kb_id": "319b7aec-40f7-4785-8c93-d8301a691ce8",
@@ -22,7 +22,7 @@
     "kb_published_date": "18/09/2023",
     "kb_published": true,
     "kb_liked_count": 1,
-    "kb_featured": false,
-    "kb_image": "../img/2c45694a-c715-4349-8e31-866fc998a509.webp"
+    "kb_image": "../img/9c1f44c7-00d5-4018-a3a4-0d65dfd19552.webp",
+    "kb_featured": true
   }
 ]

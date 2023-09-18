@@ -1,0 +1,32 @@
+<!-- updateUser.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atualização de Usuário</title>
+</head>
+<body>
+  <a href="/admin">Voltar</a>
+  <a href="/">Home</a>
+  <h1>Editar Usuário: <%= user.author_name %></h1>
+  <form action="/users/edit/<%= user.author_id %>" method="post">
+    <label for="author_name">Nome:</label>
+    <input type="text" id="author_name" name="author_name" value="<%= user.author_name %>" required><br>
+
+    <label for="author_email">Email:</label>
+    <input type="email" id="author_email" name="author_email" value="<%= user.author_email %>" required><br>
+
+    <label for="author_user">Nome de Usuário:</label>
+    <input type="text" id="author_user" name="author_user" value="<%= user.author_user %>" required><br>
+
+    <label for="author_pwd">Senha:</label>
+    <input type="password" id="author_pwd" name="author_pwd" value="<%= user.author_pwd %>" required><br>
+
+    <label>Ativo:</label>
+  <input type="checkbox" id="author_status" name="author_status" <%= user.author_status ? 'checked' : '' %> value="true"><br>   
+
+    <input type="submit" value="Atualizar Usuário">
+  </form>
+</body>
+</html>

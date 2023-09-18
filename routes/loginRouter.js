@@ -6,9 +6,21 @@ router.get("/", (req, res) => {
   res.render("login");
 });
 
-// Usa o middleware de autenticação
-router.post("/", authenticator, (req, res) => {
-  res.redirect("public/views/admin.ejs");
+router.post('/', (req, res) => {
+  const { username, password } = req.body;
+
+  const authenticatedUser = authenticator(username, password);
+
+  if (authenticatedUser) {
+    // Autenticação bem-sucedida, armazene algum indicativo na sessão
+    req.session.authenticated = true;
+    req.session.user = authenticatedUser; // Armazene informações do usuário na sessão
+    
+  } else {
+    // Credenciais inválidas, redirecione para a página de login com um erro
+    res.redirect('/login?error=1');
+  }
 });
+
 
 module.exports = router;

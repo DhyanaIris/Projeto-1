@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const updateLikeCount = require('../middlewares/liked_counter');
 const fs = require('fs');
-const upload = require('../middlewares/multer')
 const uuid = require("uuid");
+const upload = require('../middlewares/multer')
+const updateLikeCount = require('../middlewares/liked_counter');
 
 router.get("/createArticle", (req, res) => {
   res.render("createArticle");
@@ -139,7 +139,7 @@ router.post("/updateArticle/:kb_id", upload.single('kb_image'), (req, res) => {
         foundArticle.kb_body = updatedArticle.kb_body;
         foundArticle.kb_keywords = updatedArticle.kb_keywords;
         foundArticle.kb_author_email = updatedArticle.kb_author_email;
-        foundArticle.kb_featured = updatedArticle.kb_featured === "true";
+        foundArticle.kb_featured = updatedArticle.kb_featured === 'true';
         
         // Verifique se uma nova imagem foi enviada
         if (req.file) {
