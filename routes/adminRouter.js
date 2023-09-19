@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const fs = require("fs");
-const authenticator = require('../middlewares/authenticator')
+const requireAuth = require('../middlewares/authenticator');
 
 let articles = []; // Defina a variável articles no escopo do módulo
 let users = [];
@@ -31,7 +31,7 @@ if (fs.existsSync("./data/users.json")) {
   }
 }
 
-router.get("/", authenticator, (req, res) => {
+router.get("/", requireAuth, (req, res) => {
   res.render("admin", { articles, users });
 });
 

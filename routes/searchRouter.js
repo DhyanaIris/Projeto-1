@@ -35,6 +35,6 @@ function performSearch(keywords) {
     });
   
     return results;
-  }
+}
 
 module.exports = router;

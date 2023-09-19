@@ -1,5 +1,5 @@
 const express = require('express');
-const session = require('express-session');
+const session = require('cookie-session');
 const app = express();
 const fs = require('fs');
 const ejs = require('ejs');
@@ -10,10 +10,15 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({
-  secret: 'your_secret_key',
-  resave: false,
-  saveUninitialized: true
+  secret: "secret-key",
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+      maxAge: 24 * 60 * 60 * 1000
+  },
 }));
+
+
 
 app.use('/', routes)
 app.use(express.json());
@@ -33,6 +38,8 @@ app.set('views', path.join(__dirname, './public/views'));
 app.get('/', (req, res) => {
   let likedArticles = [];
   let featuredArticles = [];
+  let user = req.session.user;
+
   if(fs.existsSync('./data/articles.json')){
     try{
       const data = fs.readFileSync('./data/articles.json', 'utf8');
@@ -44,7 +51,7 @@ app.get('/', (req, res) => {
       console.error('Erro ao analisar o arquivo JSON', error);
     }
   }
-  res.render('home', {likedArticles, featuredArticles});
+  res.render('home', {likedArticles, featuredArticles, user});
 })
 
 

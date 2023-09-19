@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil do Usuário</title>
+</head>
+<body>
+  <h1>Perfil do Usuário</h1>
+  <a href="/">Home</a>
+  <a href="/admin">Voltar</a>
+  <ul>
+    <li>
+      <p>Nome: <%= user.author_name %></p>
+      <p>Usuário: <%= user.author_user %></p>
+      <p>Email: <%= user.author_email %></p>
+      <p>Status: <%= user.author_status ? 'Ativo' : 'Desativado' %></p>
+      <p>Nível: <%= user.author_level %></p>
+      <p>Senha: <%= user.author_pwd %></p>
+      <p>ID: <%= user.author_id %></p>
+    </li>
+  </ul>
+</body>
+</html>

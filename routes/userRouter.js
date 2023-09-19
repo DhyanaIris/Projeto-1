@@ -2,16 +2,16 @@ const express = require("express");
 const router = express.Router();
 const fs = require('fs');
 const uuid = require("uuid");
-
+const requireAuth = require('../middlewares/authenticator');
 
 
 // Rota para exibir o formulário de cadastro de usuário
-router.get("/signup", (req, res) => {
+router.get("/signup", requireAuth, (req, res) => {
   res.render("signup"); 
 });
 
 // Rota para lidar com o envio do formulário de cadastro de usuário
-router.post("/signup", (req, res) => {
+router.post("/signup", requireAuth, (req, res) => {
   // Receba os dados do formulário
   const novoUsuario = req.body;
 
@@ -46,20 +46,9 @@ router.post("/signup", (req, res) => {
   
 });
 
-function ordenarPropsUsuario(obj) {
-    const objOrdenado = {};
-    objOrdenado.author_id = obj.author_id;
-    objOrdenado.author_name = obj.author_name;
-    objOrdenado.author_email = obj.author_email;
-    objOrdenado.author_user = obj.author_user;
-    objOrdenado.author_pwd = obj.author_pwd;
-    objOrdenado.author_level = obj.author_level;
-    objOrdenado.author_status = obj.author_status;
-    return objOrdenado;
-  }
 
 // Rota para exibir a página de edição de usuário
-router.get('/edit/:author_id', (req, res) => {
+router.get('/edit/:author_id', requireAuth, (req, res) => {
   const authorId = req.params.author_id;
 
   // Lê o arquivo JSON de usuários
@@ -69,11 +58,11 @@ router.get('/edit/:author_id', (req, res) => {
       res.status(500).send("Erro interno do servidor");
       return;
     }
-
+    
     try {
       // Analisa o arquivo JSON em um array de objetos de usuário
       const users = JSON.parse(data);
-
+      
       // Encontre o usuário com base no author_id
       const user = users.find((user) => user.author_id === authorId);
 
@@ -82,7 +71,7 @@ router.get('/edit/:author_id', (req, res) => {
         res.status(404).send("Usuário não encontrado");
         return;
       }
-
+      
       // Renderiza a página de edição de usuário com o objeto de usuário encontrado
       res.render('editUser', { user });
     } catch (error) {
@@ -96,7 +85,7 @@ router.get('/edit/:author_id', (req, res) => {
 router.post("/edit/:author_id", (req, res) => {
   const authorId = req.params.author_id;
   const updatedUser = req.body;
-
+  
   // Lê o arquivo JSON de usuários
   fs.readFile("./data/users.json", "utf8", (err, data) => {
     if (err) {
@@ -104,20 +93,20 @@ router.post("/edit/:author_id", (req, res) => {
       res.status(500).send("Erro interno do servidor");
       return;
     }
-
+    
     try {
       // Analisa o arquivo JSON em um array de objetos de usuário
       const users = JSON.parse(data);
-
+      
       // Encontra o índice do usuário com base no author_id
       const userIndex = users.findIndex((user) => user.author_id === authorId);
-
+      
       if (userIndex === -1) {
         // Usuário não encontrado, você pode lidar com isso da maneira que preferir
         res.status(404).send("Usuário não encontrado");
         return;
       }
-
+      
       // Obtém o usuário encontrado no índice
       const foundUser = users[userIndex];
 
@@ -136,7 +125,7 @@ router.post("/edit/:author_id", (req, res) => {
           res.status(500).send("Erro interno do servidor");
           return;
         }
-
+        
         // Redireciona de volta para a página de admin ou para onde desejar
         res.redirect("/admin");
       });
@@ -146,6 +135,50 @@ router.post("/edit/:author_id", (req, res) => {
     }
   });
 });
+
+router.get("/read/:id", (req,res) => {
+  const userId = req.params.id;
+  let user = null;
+  
+  // Verifique se o arquivo JSON existe
+  if (fs.existsSync("./data/users.json")) {
+    try {
+      // Leia o arquivo JSON apenas se ele não estiver vazio
+      const data = fs.readFileSync("./data/users.json", "utf8");
+      
+      if (data) {
+        const users = JSON.parse(data);
+        
+        // Encontre o artigo com base no kb_id
+        user = users.find((findUser) => findUser.author_id === userId);
+    }
+  } catch (error) {
+    console.error("Erro ao analisar o arquivo JSON:", error);
+  }
+}
+
+if (!user) {
+  // Se o usuário não for encontrado, envie uma resposta de erro
+  res.status(404).send("Usuário não encontrado");
+} else {
+  // Se o usuário for encontrado, renderize a página de visualização do usuário
+  res.render("user", { user });
+}
+})
+
+
+function ordenarPropsUsuario(obj) {
+    const objOrdenado = {};
+    objOrdenado.author_id = obj.author_id;
+    objOrdenado.author_name = obj.author_name;
+    objOrdenado.author_email = obj.author_email;
+    objOrdenado.author_user = obj.author_user;
+    objOrdenado.author_pwd = obj.author_pwd;
+    objOrdenado.author_level = obj.author_level;
+    objOrdenado.author_status = obj.author_status;
+    return objOrdenado;
+}
+
 
 
 module.exports = router;
