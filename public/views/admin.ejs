@@ -31,6 +31,7 @@
         <p>Usuário: <%= user.author_user %></p>
         <p>Email: <%= user.author_email %></p>
         <p>Status: <%= user.author_status ? 'Ativo' : 'Desativado' %></p>
+        <a href="/users/read/<%= user.author_id%>">Ler</a>
         <a href="/users/edit/<%= user.author_id%>">Editar</a>
       </li>
     <% }); %>

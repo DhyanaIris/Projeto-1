@@ -1,28 +1,15 @@
 [
   {
-    "kb_id": "e1b95944-5407-4800-8f9b-023b8fb59024",
-    "kb_title": "dasd",
-    "kb_summary": "das",
-    "kb_body": "dsa",
-    "kb_keywords": "das",
-    "kb_author_email": "dsa@dsa.d",
-    "kb_published_date": "15/09/2023",
+    "kb_id": "c7aa4eef-c51d-4f19-bd04-5c1bd55d3073",
+    "kb_title": "Teste",
+    "kb_summary": "sdad",
+    "kb_body": "dsada",
+    "kb_keywords": "dasda",
+    "kb_author_email": "admin@admin.com",
+    "kb_published_date": "19/09/2023",
     "kb_published": true,
-    "kb_liked_count": 8,
-    "kb_image": "../img/5fd4740b-f977-4f8a-b427-b208b11c1d1f.jpg",
-    "kb_featured": true
-  },
-  {
-    "kb_id": "319b7aec-40f7-4785-8c93-d8301a691ce8",
-    "kb_title": "LALAMON",
-    "kb_summary": "dsad",
-    "kb_body": "JGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSDJGDSFHGDSSFGSD",
-    "kb_keywords": "dsadas",
-    "kb_author_email": "dsasdsa@dsa.dsa",
-    "kb_published_date": "18/09/2023",
-    "kb_published": true,
-    "kb_liked_count": 1,
-    "kb_image": "../img/9c1f44c7-00d5-4018-a3a4-0d65dfd19552.webp",
-    "kb_featured": true
+    "kb_author": "admin1",
+    "kb_liked_count": 0,
+    "kb_featured": false
   }
 ]

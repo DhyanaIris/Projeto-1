@@ -24,13 +24,14 @@
     <input type="text" id="kb_keywords" name="kb_keywords" ><br>
 
     <label for="kb_author_email">Email do Autor:</label>
-    <input type="email" id="kb_author_email" name="kb_author_email" ><br>
+    <input type="email" id="kb_author_email" name="kb_author_email" value="<%= req.session.user.author_email %>" readonly>
+
 
     <label for="kb_featured">Destaque:</label>
     <input type="checkbox" id="kb_featured" name="kb_featured" value="true">
 
-  <label for="kb_image">Imagem:</label>
-  <input type="file" id="kb_image" name="kb_image" accept="image/*"><br>
+    <label for="kb_image">Imagem:</label>
+    <input type="file" id="kb_image" name="kb_image" accept="image/*"><br>
 
   <input type="submit" value="Cadastrar">
   </form>

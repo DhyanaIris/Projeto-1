@@ -4,15 +4,18 @@ const fs = require('fs');
 const uuid = require("uuid");
 const upload = require('../middlewares/multer')
 const updateLikeCount = require('../middlewares/liked_counter');
+const requireAuth = require('../middlewares/authenticator');
 
-router.get("/createArticle", (req, res) => {
-  res.render("createArticle");
+
+router.get("/createArticle", requireAuth, (req, res) => {
+  res.render("createArticle", { req });
 });
 
-router.post("/createArticle", upload.single('kb_image'),(req, res) => {
+router.post("/createArticle", requireAuth, upload.single('kb_image'),(req, res) => {
     // Receba os dados do formulário
     const novoArtigo = req.body;
   
+    novoArtigo.kb_author = req.session.user.author_name;
     novoArtigo.kb_id = uuid.v4();
     novoArtigo.kb_liked_count = 0;
     novoArtigo.kb_published_date = new Date().toLocaleDateString();
@@ -50,31 +53,13 @@ router.post("/createArticle", upload.single('kb_image'),(req, res) => {
     res.redirect("/article/createArticle");
   });
   
-  function ordenarProps(obj) {
-    const objOrdenado = {};
-    objOrdenado.kb_id = obj.kb_id;
-    objOrdenado.kb_title = obj.kb_title;
-    objOrdenado.kb_summary = obj.kb_summary;
-    objOrdenado.kb_body = obj.kb_body;
-    objOrdenado.kb_keywords = obj.kb_keywords;
-    objOrdenado.kb_author_email = obj.kb_author_email;
-    objOrdenado.kb_published_date = obj.kb_published_date;
-    objOrdenado.kb_published = obj.kb_published;
-    objOrdenado.kb_liked_count = obj.kb_liked_count;
-    objOrdenado.kb_featured = obj.kb_featured;
-    objOrdenado.kb_image = obj.kb_image;
-    return objOrdenado;
-  }
-  
-  
-  
   // Atualiza o contador de like do artigo
   router.post('/like/:id', updateLikeCount, (req, res) => {
     const articleId = req.params.id;
     res.redirect(`/article/${articleId}`);
   });
   
-  router.get('/:id', (req, res) => {
+router.get('/:id', (req, res) => {
       const articleId = req.params.id;
       let articlesData = [];
     
@@ -88,9 +73,9 @@ router.post("/createArticle", upload.single('kb_image'),(req, res) => {
         return res.status(404).send('Artigo não encontrado');
       }
       res.render('article', { article });
-  });
+});
 
-router.get("/updateArticle/:kb_id", (req, res) => {
+router.get("/updateArticle/:kb_id", requireAuth, (req, res) => {
   const kbId = req.params.kb_id;
   let articleUpdate = null;
 
@@ -116,7 +101,7 @@ router.get("/updateArticle/:kb_id", (req, res) => {
 });
 
 // Defina a rota para lidar com a atualização do artigo
-router.post("/updateArticle/:kb_id", upload.single('kb_image'), (req, res) => {
+router.post("/updateArticle/:kb_id", requireAuth, upload.single('kb_image'), (req, res) => {
   const kbId = req.params.kb_id;
   const updatedArticle = req.body;
 
@@ -161,7 +146,7 @@ router.post("/updateArticle/:kb_id", upload.single('kb_image'), (req, res) => {
   res.redirect('/admin');
 });
 
-router.get("/delete/:kb_id", (req, res) => {
+router.get("/delete/:kb_id", requireAuth, (req, res) => {
   const kbId = req.params.kb_id;
 
   // Verifique se o arquivo JSON existe
@@ -192,6 +177,24 @@ router.get("/delete/:kb_id", (req, res) => {
   // Redirecione de volta para a página de administração após a exclusão
   res.redirect('/admin');
 });
+
+
+function ordenarProps(obj) {
+  const objOrdenado = {};
+  objOrdenado.kb_id = obj.kb_id;
+  objOrdenado.kb_title = obj.kb_title;
+  objOrdenado.kb_summary = obj.kb_summary;
+  objOrdenado.kb_body = obj.kb_body;
+  objOrdenado.kb_keywords = obj.kb_keywords;
+  objOrdenado.kb_author_email = obj.kb_author_email;
+  objOrdenado.kb_published_date = obj.kb_published_date;
+  objOrdenado.kb_published = obj.kb_published;
+  objOrdenado.kb_author = obj.kb_author;
+  objOrdenado.kb_liked_count = obj.kb_liked_count;
+  objOrdenado.kb_featured = obj.kb_featured;
+  objOrdenado.kb_image = obj.kb_image;
+  return objOrdenado;
+}
 
 
 module.exports = router;
