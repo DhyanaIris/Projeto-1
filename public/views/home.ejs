@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="../styles/global.css">
   <link rel="stylesheet" type="text/css" href="../styles/home.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <script src="../app.js" defer></script>
   <title>Projeto 1</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,49 +49,49 @@
       <article class="title">
         <h1>Kpop Events</h1>
       </article>
-      <section class="searchContainer">
-        <form action="/searchResults" method="get">
+      <section>
+        <form action="/searchResults" method="get" class="searchContainer">
           <input type="text" class="searchBar" name="keywords" placeholder="Pesquisar">
           <button type="submit" class="searchBtn">
             <img src="../img/lupa.svg" alt="Lupa">
           </button>
         </form>
-        <!-- <input type="text" class="searchBar" id="searchInput" placeholder="Pesquisar">
-        <a href="#" class="searchBtn" id="searchButton">
-          <img src="../img/lupa.svg" alt="Lupa">
-        </a> -->
       </section>
       <section class="container">
         <article class="subTitle">
           <h2>Publicações em Destaque</h2>
         </article>
         <section class="groupContainer">
-            <% featuredArticles.forEach(article => { %>
-              <% if (article.kb_featured) { %>
-            <section class="newsContainer">
-              <section class="imgContainer">
-                <img src="../img/bg.jpg" alt="" class="">
-              </section>
+          <% featuredArticles.forEach(article=> { %>
+            <% if (article.kb_featured) { %>
               <a href="/article/<%= article.kb_id %>">
-                <article class="infoContainer">
-                  <h3><%= article.kb_title %></h3>
-                  <p><%= article.kb_summary %></p>
-                </article>
+                <section class="newsContainer">
+                  <section class="imgContainer">
+                    <img src="../img/bg.jpg" alt="" class="">
+                  </section>
+                  <article class="infoContainer">
+                    <h3>
+                      <%= article.kb_title %>
+                    </h3>
+                    <p>
+                      <%= article.kb_summary %>
+                    </p>
+                  </article>
+                </section>
               </a>
-            </section>
               <% }; %>
-            <% }); %>
-          <section class="newsContainer">
-            <section class="imgContainer">
-              <img src="../img/bg.jpg" alt="" class="">
-            </section>
-            <a href="#" target="_blank">
-              <article class="infoContainer">
-                <h3>TWICE READY TO BE TOUR BRAZIL</h3>
-                <p>Anunciado show do girl group Twice no Allianz Parque</p>
-              </article>
-            </a>
-          </section>
+                <% }); %>
+                  <a href="#" target="_blank">
+                    <section class="newsContainer">
+                      <section class="imgContainer">
+                        <img src="../img/bg.jpg" alt="" class="">
+                      </section>
+                      <article class="infoContainer">
+                        <h3>TWICE READY TO BE TOUR BRAZIL</h3>
+                        <p>Anunciado show do girl group Twice no Allianz Parque</p>
+                      </article>
+                    </section>
+                  </a>
         </section>
       </section>
       <section class="container">
@@ -98,39 +99,34 @@
           <h2>Publicações Mais Curtidas</h2>
         </article>
         <section class="groupContainer">
-          <% likedArticles.forEach(article => { %>
-          <section class="newsContainer">
-            <section class="imgContainer">
-              <img src="../img/bg.jpg" alt="" class="">
-            </section>
+          <% likedArticles.forEach(article=> { %>
             <a href="/article/<%= article.kb_id %>">
-              <article class="infoContainer">
-                <h3><%= article.kb_title %></h3>
-                <p><%= article.kb_summary %></p>
-              </article>
+              <section class="newsContainer">
+                <section class="imgContainer">
+                  <img src="../img/bg.jpg" alt="" class="">
+                </section>
+                <article class="infoContainer">
+                  <h3>
+                    <%= article.kb_title %>
+                  </h3>
+                  <p>
+                    <%= article.kb_summary %>
+                  </p>
+                </article>
+              </section>
             </a>
-          </section>
-          <% }); %>
+            <% }); %>
         </section>
       </section>
     </section>
   </main>
   <footer>
-    <section class="midiaContainer">
-      <a href="#" target="_blank">
-        p
-        <img src="" alt="">
-      </a>
-      <a href="#" target="_blank">
-        p
-        <img src="" alt="">
-      </a>
-      <a href="#" target="_blank">
-        p
-        <img src="" alt="">
-      </a>
+    <section>
+      <i class='bx bxl-twitter bx-md'></i>
+      <i class='bx bxl-instagram bx-md'></i>
+      <i class='bx bxl-youtube bx-md'></i>
     </section>
-    <p>Todos os direitos reservados 2023</p>
+    <p>Todos os direitos reservados © 2023</p>
   </footer>
 </body>
 

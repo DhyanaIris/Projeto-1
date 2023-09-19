@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="../styles/global.css">
   <link rel="stylesheet" type="text/css" href="../styles/home.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <script src="../app.js" defer></script>
   <title>Projeto 1</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,11 +34,6 @@
                 Login
               </li>
             </a>
-            <a href="/createArticle">
-              <li>
-                Cadastro de Artigo
-              </li>
-            </a>
           </ul>
         </nav>
       </section>
@@ -48,46 +44,46 @@
       <article class="title">
         <h1>Kpop Events</h1>
       </article>
-      <section class="searchContainer">
-        <form action="/searchResults" method="get">
+      <section>
+        <form action="/searchResults" method="get" class="searchContainer">
           <input type="text" class="searchBar" name="keywords" placeholder="Pesquisar">
           <button type="submit" class="searchBtn">
             <img src="../img/lupa.svg" alt="Lupa">
           </button>
         </form>
-        <!-- <input type="text" class="searchBar" id="searchInput" placeholder="Pesquisar">
-        <a href="#" class="searchBtn" id="searchButton">
-          <img src="../img/lupa.svg" alt="Lupa">
-        </a> -->
       </section>
       <section class="container">
-        <h1>Resultados da Pesquisa</h1>
-    <ul>
-      <% results.forEach(article => { %>
-        <li>
-          <a href="/article/<%= article.kb_id %>"><%= article.kb_title %></a>
-          <p><%= article.kb_summary %></p>
-        </li>
-      <% }); %>
-    </ul>
-    </section>
+        <article class="subTitle">
+          <h2>Resultados da Pesquisa</h2>
+        </article>
+        <section class="groupContainer">
+          <% results.forEach(article=> { %>
+            <a href="/article/<%= article.kb_id %>">
+              <section class="newsContainer">
+                <section class="imgContainer">
+                  <img src="../img/bg.jpg" alt="" class="">
+                </section>
+                <article class="infoContainer">
+                  <h3>
+                    <%= article.kb_title %>
+                  </h3>
+                  <p>
+                    <%= article.kb_summary %>
+                  </p>
+                </article>
+              </section>
+            </a>
+            <% }); %>
+        </section>
+      </section>
   </main>
   <footer>
-    <section class="midiaContainer">
-      <a href="#" target="_blank">
-        p
-        <img src="" alt="">
-      </a>
-      <a href="#" target="_blank">
-        p
-        <img src="" alt="">
-      </a>
-      <a href="#" target="_blank">
-        p
-        <img src="" alt="">
-      </a>
+    <section>
+      <i class='bx bxl-twitter bx-md'></i>
+      <i class='bx bxl-instagram bx-md'></i>
+      <i class='bx bxl-youtube bx-md'></i>
     </section>
-    <p>Todos os direitos reservados 2023</p>
+    <p>Todos os direitos reservados © 2023</p>
   </footer>
 </body>
 
