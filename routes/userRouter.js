@@ -7,7 +7,8 @@ const requireAuth = require('../middlewares/authenticator');
 
 // Rota para exibir o formulário de cadastro de usuário
 router.get("/signup", requireAuth, (req, res) => {
-  res.render("signup"); 
+  let user = req.session.user;
+  res.render("signup", user); 
 });
 
 // Rota para lidar com o envio do formulário de cadastro de usuário
@@ -49,6 +50,7 @@ router.post("/signup", requireAuth, (req, res) => {
 
 // Rota para exibir a página de edição de usuário
 router.get('/edit/:author_id', requireAuth, (req, res) => {
+  let user = req.session.user;
   const authorId = req.params.author_id;
 
   // Lê o arquivo JSON de usuários
@@ -64,7 +66,7 @@ router.get('/edit/:author_id', requireAuth, (req, res) => {
       const users = JSON.parse(data);
       
       // Encontre o usuário com base no author_id
-      const user = users.find((user) => user.author_id === authorId);
+      const author = users.find((author) => author.author_id === authorId);
 
       if (!user) {
         // Usuário não encontrado, você pode lidar com isso da maneira que preferir
@@ -73,7 +75,7 @@ router.get('/edit/:author_id', requireAuth, (req, res) => {
       }
       
       // Renderiza a página de edição de usuário com o objeto de usuário encontrado
-      res.render('editUser', { user });
+      res.render('editUser', { author, user });
     } catch (error) {
       console.error("Erro ao analisar o arquivo JSON de usuários:", error);
       res.status(500).send("Erro interno do servidor");

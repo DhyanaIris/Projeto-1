@@ -1,7 +1,7 @@
 [
   {
     "author_id": "9d8f6481-ab0f-4dfc-82ea-e6fd1fdf6040",
-    "author_name": "TE543",
+    "author_name": "TE5434",
     "author_email": "admin@admin.com",
     "author_user": "admin",
     "author_pwd": "admin",
@@ -10,10 +10,10 @@
   },
   {
     "author_id": "429a07e7-5caa-43c0-b6a5-a0d0c1d30542",
-    "author_name": "das",
+    "author_name": "usuariozinho",
     "author_email": "da@dsa.dsa",
     "author_user": "das",
-    "author_pwd": "da",
+    "author_pwd": "123",
     "author_level": "admin",
     "author_status": true
   }

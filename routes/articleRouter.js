@@ -8,7 +8,8 @@ const requireAuth = require('../middlewares/authenticator');
 
 
 router.get("/createArticle", requireAuth, (req, res) => {
-  res.render("createArticle", { req });
+  let user = req.session.user;
+  res.render("createArticle", { req, user });
 });
 
 router.post("/createArticle", requireAuth, upload.single('kb_image'),(req, res) => {
@@ -62,6 +63,7 @@ router.post("/createArticle", requireAuth, upload.single('kb_image'),(req, res) 
 router.get('/:id', (req, res) => {
       const articleId = req.params.id;
       let articlesData = [];
+      let user = req.session.user;
     
       const data = fs.readFileSync('./data/articles.json', 'utf8');
       articlesData = JSON.parse(data);
@@ -72,12 +74,13 @@ router.get('/:id', (req, res) => {
       if (!article) {
         return res.status(404).send('Artigo não encontrado');
       }
-      res.render('article', { article });
+      res.render('article', { article, user });
 });
 
 router.get("/updateArticle/:kb_id", requireAuth, (req, res) => {
   const kbId = req.params.kb_id;
   let articleUpdate = null;
+  let user = req.session.user;
 
   // Verifique se o arquivo JSON existe
   if (fs.existsSync("./data/articles.json")) {
@@ -97,7 +100,7 @@ router.get("/updateArticle/:kb_id", requireAuth, (req, res) => {
   }
 
   // Renderize a página de atualização do artigo com as informações atuais
-  res.render("updateArticle", { articleUpdate });
+  res.render("updateArticle", { articleUpdate, user });
 });
 
 // Defina a rota para lidar com a atualização do artigo

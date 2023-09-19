@@ -32,7 +32,8 @@ if (fs.existsSync("./data/users.json")) {
 }
 
 router.get("/", requireAuth, (req, res) => {
-  res.render("admin", { articles, users });
+  let user = req.session.user;
+  res.render("admin", { articles, users, user });
 });
 
 

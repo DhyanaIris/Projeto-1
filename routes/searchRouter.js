@@ -6,9 +6,10 @@ const fs = require('fs');
 router.get("/", (req, res) => {
     const keywords = req.query.keywords; // Obtém as palavras-chave da consulta
     const results = performSearch(keywords); // Realiza a pesquisa
+    let user = req.session.user;
   
     // Renderiza a página de resultados da pesquisa
-    res.render('searchResults', { results });
+    res.render('searchResults', { results, user });
 });
 
 // Função para realizar a pesquisa

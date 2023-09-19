@@ -29,11 +29,26 @@
                 Home
               </li>
             </a>
-            <a href="/login">
-              <li>
-                Login
-              </li>
-            </a>
+            <% if (!user) { %>
+              <!-- Mostrar apenas quando o usuário NÃO estiver logado -->
+              <a href="/login">
+                <li>
+                  Login
+                </li>
+              </a>
+            <% } else { %>
+              <!-- Mostrar apenas quando o usuário estiver logado -->
+              <a href="/admin">
+                <li>
+                  Admin
+                </li>
+              </a>
+              <a href="/login/logout">
+                <li>
+                  Logout
+                </li>
+              </a>
+            <% } %>
           </ul>
         </nav>
       </section>

@@ -9,6 +9,28 @@
   <h1>Perfil do Usuário</h1>
   <a href="/">Home</a>
   <a href="/admin">Voltar</a>
+
+  <% if (!user) { %>
+    <!-- Mostrar apenas quando o usuário NÃO estiver logado -->
+    <a href="/login">
+      <li>
+        Login
+      </li>
+    </a>
+  <% } else { %>
+    <!-- Mostrar apenas quando o usuário estiver logado -->
+    <a href="/admin">
+      <li>
+        Admin
+      </li>
+    </a>
+    <a href="/login/logout">
+      <li>
+        Logout
+      </li>
+    </a>
+  <% } %>
+  
   <ul>
     <li>
       <p>Nome: <%= user.author_name %></p>
