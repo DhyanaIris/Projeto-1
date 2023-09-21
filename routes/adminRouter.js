@@ -33,8 +33,18 @@ if (fs.existsSync("./data/users.json")) {
 
 router.get("/", requireAuth, (req, res) => {
   let user = req.session.user;
-  res.render("admin", { articles, users, user });
+  let filteredArticles = [];
+
+  if (user.author_level === "admin") {
+    // Se o usuário for admin, exiba todos os artigos
+    filteredArticles = articles;
+  } else {
+    // Caso contrário, exiba apenas os artigos do usuário logado
+    filteredArticles = articles.filter((article) => article.kb_author_email === user.author_email);
+  }
+  res.render("admin", { articles: filteredArticles, users, user });
 });
+
 
 
 module.exports = router;

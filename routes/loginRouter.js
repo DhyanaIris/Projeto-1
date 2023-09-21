@@ -23,7 +23,7 @@ function login(req, res, next) {
   const { username, password } = req.body;
   // Verificar se o usuário e a senha correspondem a um usuário no JSON
   const user = users.find((user) => user.author_user === username && user.author_pwd === password);
-  if (user) {
+  if (user && user.author_status) {
     // Autenticação bem-sucedida, armazenar na sessão
     req.session.authenticated = true;
     req.session.user = user;
