@@ -46,7 +46,12 @@
     <input type="password" id="author_pwd" name="author_pwd" value="<%= author.author_pwd %>" required><br>
 
     <label>Ativo:</label>
-  <input type="checkbox" id="author_status" name="author_status" <%= author.author_status ? 'checked' : '' %> value="true"><br>   
+    <input type="checkbox" id="author_status" name="author_status" value="on" <%= author.author_status === 'on' ? 'checked' : '' %>>
+
+    <label>Admin:</label>
+    <input type="checkbox" id="author_level" name="author_level" value="admin" <%= author.author_level === 'admin' ? 'checked' : '' %>>
+
+   
 
     <input type="submit" value="Atualizar Usuário">
   </form>

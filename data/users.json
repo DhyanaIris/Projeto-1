@@ -6,15 +6,15 @@
     "author_user": "admin",
     "author_pwd": "admin",
     "author_level": "admin",
-    "author_status": true
+    "author_status": "on"
   },
   {
     "author_id": "429a07e7-5caa-43c0-b6a5-a0d0c1d30542",
-    "author_name": "usuariozinho",
+    "author_name": "user",
     "author_email": "da@dsa.dsa",
-    "author_user": "das",
+    "author_user": "user",
     "author_pwd": "123",
-    "author_level": "admin",
-    "author_status": true
+    "author_level": "user",
+    "author_status": "on"
   }
 ]
