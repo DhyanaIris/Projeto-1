@@ -65,10 +65,14 @@ main {
   margin: 0 2px;
 }
 
+.email {
+  font-size: 1rem;
+}
 .tableContainer tr{
   text-align: center;
   font-size: 1.2rem;
 }
+
 
 .tableContainer tbody tr:hover {
   background-color: #f8c99a5d;
