@@ -16,6 +16,7 @@ router.post("/createArticle", requireAuth, upload.single('kb_image'),(req, res) 
     // Receba os dados do formulário
     const novoArtigo = req.body;
   
+    novoArtigo.kb_author_id = req.session.user.author_id;
     novoArtigo.kb_author = req.session.user.author_name;
     novoArtigo.kb_id = uuid.v4();
     novoArtigo.kb_liked_count = 0;
@@ -55,10 +56,10 @@ router.post("/createArticle", requireAuth, upload.single('kb_image'),(req, res) 
   });
   
   // Atualiza o contador de like do artigo
-  router.post('/like/:id', updateLikeCount, (req, res) => {
+router.post('/like/:id', updateLikeCount, (req, res) => {
     const articleId = req.params.id;
     res.redirect(`/article/${articleId}`);
-  });
+});
   
 router.get('/:id', (req, res) => {
       const articleId = req.params.id;
@@ -92,8 +93,22 @@ router.get("/updateArticle/:kb_id", requireAuth, (req, res) => {
         const articles = JSON.parse(data);
 
         // Encontre o artigo com base no kb_id
-        articleUpdate = articles.find((article) => article.kb_id === kbId);
+        const articleUpdate = articles.find((article) => article.kb_id === kbId);
+
+        if (articleUpdate) {
+          // Verifique se o usuário é o autor do artigo ou se é um administrador
+          if (user.author_id === articleUpdate.kb_author_id || user.author_level === 'admin') {
+            // O usuário tem permissão para editar o artigo, renderize a página de edição
+            res.render("updateArticle", { articleUpdate, user });
+          } else {
+            // O usuário não tem permissão para editar o artigo, redirecione ou exiba uma mensagem de erro
+            res.status(403).send("Permissão negada");
+          }
+        } else {
+          // Artigo não encontrado, redirecione ou exiba uma mensagem de erro
+          res.status(404).send("Artigo não encontrado");
       }
+    }
     } catch (error) {
       console.error("Erro ao analisar o arquivo JSON:", error);
     }
@@ -107,6 +122,7 @@ router.get("/updateArticle/:kb_id", requireAuth, (req, res) => {
 router.post("/updateArticle/:kb_id", requireAuth, upload.single('kb_image'), (req, res) => {
   const kbId = req.params.kb_id;
   const updatedArticle = req.body;
+  let user = req.session.user
 
   // Verifique se o arquivo JSON existe
   if (fs.existsSync("./data/articles.json")) {
@@ -121,18 +137,20 @@ router.post("/updateArticle/:kb_id", requireAuth, upload.single('kb_image'), (re
       if (foundArticleIndex !== -1) {
         const foundArticle = articles[foundArticleIndex];
 
-        // Atualize as propriedades do artigo com base nos dados recebidos
-        foundArticle.kb_title = updatedArticle.kb_title;
-        foundArticle.kb_summary = updatedArticle.kb_summary;
-        foundArticle.kb_body = updatedArticle.kb_body;
-        foundArticle.kb_keywords = updatedArticle.kb_keywords;
-        foundArticle.kb_author_email = updatedArticle.kb_author_email;
-        foundArticle.kb_featured = updatedArticle.kb_featured === 'true';
+        if (user.author_id === foundArticle.kb_author_id || user.author_level === 'admin') {
+          
+          foundArticle.kb_title = updatedArticle.kb_title;
+          foundArticle.kb_summary = updatedArticle.kb_summary;
+          foundArticle.kb_body = updatedArticle.kb_body;
+          foundArticle.kb_keywords = updatedArticle.kb_keywords;
+          foundArticle.kb_author_email = updatedArticle.kb_author_email;
+          foundArticle.kb_featured = updatedArticle.kb_featured === 'true';
         
         // Verifique se uma nova imagem foi enviada
         if (req.file) {
           foundArticle.kb_image = `../img/${req.file.filename}`;
         }
+      }
 
         // Salve o artigo atualizado de volta à lista
         articles[foundArticleIndex] = foundArticle;
@@ -184,6 +202,8 @@ router.get("/delete/:kb_id", requireAuth, (req, res) => {
 
 function ordenarProps(obj) {
   const objOrdenado = {};
+  objOrdenado.kb_author = obj.kb_author;
+  objOrdenado.kb_author_id = obj.kb_author_id;
   objOrdenado.kb_id = obj.kb_id;
   objOrdenado.kb_title = obj.kb_title;
   objOrdenado.kb_summary = obj.kb_summary;
@@ -192,7 +212,6 @@ function ordenarProps(obj) {
   objOrdenado.kb_author_email = obj.kb_author_email;
   objOrdenado.kb_published_date = obj.kb_published_date;
   objOrdenado.kb_published = obj.kb_published;
-  objOrdenado.kb_author = obj.kb_author;
   objOrdenado.kb_liked_count = obj.kb_liked_count;
   objOrdenado.kb_featured = obj.kb_featured;
   objOrdenado.kb_image = obj.kb_image;

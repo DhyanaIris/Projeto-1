@@ -25,6 +25,7 @@
       </li>
     <% }); %>
   </ul>
+  <% if (user.author_level === 'admin') { %>
   <h1>Usuários</h1>
   <a href="/users/signup">Cadastro de Usuário</a>
   <ul>
@@ -33,11 +34,12 @@
         <p>Nome: <%= user.author_name %></p>
         <p>Usuário: <%= user.author_user %></p>
         <p>Email: <%= user.author_email %></p>
-        <p>Status: <%= user.author_status ? 'Ativo' : 'Desativado' %></p>
-        <a href="/users/read/<%= user.author_id%>">Ler</a>
+        <p>Nível: <%= user.author_level %></p>
+        <p>Status: <%= user.author_status === 'on' ? 'Ativo' : 'Desativado' %></p>
         <a href="/users/edit/<%= user.author_id%>">Editar</a>
       </li>
     <% }); %>
+    <% } %>
   </ul>
 
 </body>
