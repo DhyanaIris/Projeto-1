@@ -1,0 +1,95 @@
+/* Main */
+main {
+  background: rgb(118,173,230);
+  background: linear-gradient(90deg, rgba(118,173,230,1) 0%, rgb(168, 118, 230) 50%, rgba(230,118,194,1) 100%);
+  opacity: 0.75;
+  padding-bottom: 50px;
+}
+
+.createContainer {
+  align-self: flex-end;
+  margin-right: 1.5rem;
+  display: flex;
+  align-items: center;
+  color: #000;
+  padding: 10px;
+  background: linear-gradient(90deg, #FFC184, transparent) #FFC184; 
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 500ms ease-in-out;
+}
+
+.createContainer i {
+  margin-right: 5px;
+  transform: translateY(10%);
+}
+
+.createContainer:hover {
+  background: linear-gradient(90deg, #FFC184, transparent) #A876E6;
+} 
+
+.tableContainer {
+  width: 95%;
+  max-height: calc(100% - 2rem);
+  margin: 0.8rem auto;
+  border-radius: 10px;
+  overflow: auto;
+}
+
+.tableContainer table, th, td {
+  border-collapse: collapse;
+  padding: 1rem;
+}
+
+.tableContainer thead th {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: #FFC184;
+}
+
+.tableContainer table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.tableContainer tbody {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.tableContainer tbody tr td a{
+  margin: 0 2px;
+}
+
+.tableContainer tr{
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.tableContainer tbody tr:hover {
+  background-color: #f8c99a5d;
+}
+
+.even-row {
+  background-color: #FFF;
+}
+
+.odd-row {
+  background-color: #dddddd73;
+}
+
+.read {
+  color: #228B22;
+}
+
+.edit {
+  color: #0044CC;
+}
+
+.delete {
+  color: #FF5E62;
+}

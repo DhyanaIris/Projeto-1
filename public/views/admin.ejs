@@ -1,44 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="../styles/global.css">
+  <link rel="stylesheet" type="text/css" href="../styles/home.css">
   <link rel="stylesheet" type="text/css" href="../styles/admin.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <title>Document</title>
 </head>
+
 <body>
-  <h1>Admin</h1>
-  <a href="/">Home</a>
+  <header>
+    <section class="headerContainer">
+      <section class="logo">
+        <img src="" alt="">
+        <h1>KPOP</h1>
+        <h1 id="event">EVENT</h1>
+      </section>
+      <section class="navContainer">
+        <nav>
+          <ul>
+            <a href="/">
+              <li>
+                Home
+              </li>
+            </a>
+            <% if (!user) { %>
+              <!-- Mostrar apenas quando o usuário NÃO estiver logado -->
+              <a href="/login">
+                <li>
+                  Login
+                </li>
+              </a>
+              <% } else { %>
+                <!-- Mostrar apenas quando o usuário estiver logado -->
+                <a href="/login/logout">
+                  <li>
+                    Logout
+                  </li>
+                </a>
+                <% } %>
+          </ul>
+        </nav>
+      </section>
+    </section>
+  </header>
 
-  <h1>Artigos</h1>
-  <a href="/article/createArticle">Cadastro de Artigo</a>
-  <ul>
-    <% articles.forEach((article) => { %>
-      <li>
-        <p>Título: <%= article.kb_title %></p>
-        <p>Sumário: <%= article.kb_summary %></p>
-        <a href="/article/<%= article.kb_id %>">Ler</a>
-        <a href="/article/updateArticle/<%= article.kb_id %>">Editar</a>
-        <a href="/article/delete/<%= article.kb_id %>">Deletar</a>
-      </li>
-    <% }); %>
-  </ul>
-  <h1>Usuários</h1>
-  <a href="/users/signup">Cadastro de Usuário</a>
-  <ul>
-    <% users.forEach((user) => { %>
-      <li>
-        <p>Nome: <%= user.author_name %></p>
-        <p>Usuário: <%= user.author_user %></p>
-        <p>Email: <%= user.author_email %></p>
-        <p>Status: <%= user.author_status ? 'Ativo' : 'Desativado' %></p>
-        <a href="/users/read/<%= user.author_id%>">Ler</a>
-        <a href="/users/edit/<%= user.author_id%>">Editar</a>
-      </li>
-    <% }); %>
-  </ul>
+  <main>
+    <section class="mainContainer">
+      <article class="title">
+        <h1>Administrador</h1>
+      </article>
+      <section class="container">
+        <article class="subTitle">
+          <h2>Artigos</h2>
+        </article>
+        <section class="groupContainer">
+            <a href="/article/createArticle" class="createContainer">
+              <i class='bx bx-plus bx-sm'></i>
+              Cadastro de Artigo
+            </a>
+          <section class="tableContainer">
+            <table>
+              <thead>
+                <tr>
+                  <th> Título </th>
+                  <th> Resumo </th>
+                  <th> Edição </th>
+                </tr>
+              </thead>
+              <tbody>
+                <% articles.forEach((article, index)=> { %>
+                <tr class="<%= index % 2 === 0 ? 'even-row' : 'odd-row' %>">
+                  <td><%= article.kb_title %></td>
+                  <td><%= article.kb_summary %></td>
+                  <td>
+                    <a href="/article/<%= article.kb_id %>" class="read">
+                      <i class='bx bx-book-open bx-sm bx-tada-hover'></i>
+                    </a>
+                    <a href="/article/updateArticle/<%= article.kb_id %>" class="edit">
+                      <i class='bx bxs-edit bx-sm bx-tada-hover'></i>
+                    </a>
+                    <a href="/article/delete/<%= article.kb_id %>" class="delete">
+                      <i class='bx bx-trash bx-sm bx-tada-hover'></i>
+                    </a>
+                  </td>
+                </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </section>
+          <!-- <a href="/article/createArticle">Cadastro de Artigo</a>
+          <ul>
+            <% articles.forEach((article)=> { %>
+              <li>
+                <p>Título: <%= article.kb_title %>
+                </p>
+                <p>Sumário: <%= article.kb_summary %>
+                </p>
+                <a href="/article/<%= article.kb_id %>">Ler</a>
+                <a href="/article/updateArticle/<%= article.kb_id %>">Editar</a>
+                <a href="/article/delete/<%= article.kb_id %>">Deletar</a>
+              </li>
+              <% }); %>
+          </ul> -->
+        </section>
+        <article class="subTitle">
+          <h2>Usuários</h2>
+        </article>
+        <section class="groupContainer"></section>
+        <a href="/users/signup">Cadastro de Usuário</a>
+        <ul>
+          <% users.forEach((user)=> { %>
+            <li>
+              <p>Nome: <%= user.author_name %>
+              </p>
+              <p>Usuário: <%= user.author_user %>
+              </p>
+              <p>Email: <%= user.author_email %>
+              </p>
+              <p>Status: <%= user.author_status ? 'Ativo' : 'Desativado' %>
+              </p>
+              <a href="/users/read/<%= user.author_id%>">Ler</a>
+              <a href="/users/edit/<%= user.author_id%>">Editar</a>
+            </li>
+            <% }); %>
+        </ul>
+      </section>
+    </section>
 
+    </section>
+  </main>
+
+  <footer>
+    <section>
+      <i class='bx bxl-twitter bx-md'></i>
+      <i class='bx bxl-instagram bx-md'></i>
+      <i class='bx bxl-youtube bx-md'></i>
+    </section>
+    <p>Todos os direitos reservados © 2023</p>
+  </footer>
 </body>
+
 </html>

@@ -4,11 +4,10 @@ const fs = require('fs');
 const uuid = require("uuid");
 const requireAuth = require('../middlewares/authenticator');
 
-
 // Rota para exibir o formulário de cadastro de usuário
 router.get("/signup", requireAuth, (req, res) => {
   let user = req.session.user;
-  res.render("signup", user); 
+  res.render("signup", { user }); 
 });
 
 // Rota para lidar com o envio do formulário de cadastro de usuário
@@ -167,7 +166,6 @@ if (!user) {
   res.render("user", { user });
 }
 })
-
 
 function ordenarPropsUsuario(obj) {
     const objOrdenado = {};
