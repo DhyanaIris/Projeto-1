@@ -80,7 +80,6 @@ router.get('/:id', (req, res) => {
 
 router.get("/updateArticle/:kb_id", requireAuth, (req, res) => {
   const kbId = req.params.kb_id;
-  let articleUpdate = null;
   let user = req.session.user;
 
   // Verifique se o arquivo JSON existe
@@ -113,9 +112,6 @@ router.get("/updateArticle/:kb_id", requireAuth, (req, res) => {
       console.error("Erro ao analisar o arquivo JSON:", error);
     }
   }
-
-  // Renderize a página de atualização do artigo com as informações atuais
-  res.render("updateArticle", { articleUpdate, user });
 });
 
 // Defina a rota para lidar com a atualização do artigo

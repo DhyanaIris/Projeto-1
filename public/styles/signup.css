@@ -1,0 +1,185 @@
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 110vh;
+  background: rgb(168,118,230);
+  background: linear-gradient(90deg, rgba(168,118,230,1) 0%, rgba(255,209,102,1) 50%, rgba(255, 107, 107, 0.788) 100%);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  font-size: 1.2em;
+}
+
+.container {
+  width: 700px;
+  height: 900px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  color: #000;
+  border-radius: 10px;
+  padding: 30px 40px;
+  background-color: #fff;
+}
+
+.container h1 {
+  font-size: 36px;
+  text-align: center;
+  text-shadow: 1px 1px 5px #FFD8B8;
+}
+
+.container .inputBox {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 30px 0;
+}
+
+.inputBox label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+/* Faz com que a label do email sempre esteja levantada */
+#kb_author_email {
+  top: -5px;
+}
+
+.inputBox input:focus~label,
+.inputBox input:valid~label {
+  top: -5px;
+}
+
+.inputBox input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  color: #000;
+  padding: 20px 45px 20px 20px;
+  border-bottom: 2px solid #FFD8B8;
+}
+
+.inputBox input:focus {
+  border-bottom: 2px solid #FFC184;
+}
+
+.inputBox input::placeholder {
+  color: #000;
+}
+
+.container .check {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 15px;
+}
+
+.check label input {
+  accent-color: #fff;
+  margin-right: 3px;
+}
+
+.contentText {
+  width: 100%;
+  height: 225px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.contentText textarea {
+  width: 100%;
+  height: 100%;
+  font-size: 1em;
+  margin-top: 5px;
+  border: 2px solid #FFD8B8;
+  border-radius: 5px;
+  outline-color: #FFC184;
+  resize: none;
+  text-align: justify;
+}
+
+.container .btn {
+  position: relative;
+  width: 30%;
+  height: 45px;
+  background: #FFD8B8;
+  background: linear-gradient(90deg, #FFD8B8, #FFC184);
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 35px;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+  transition: left 500ms ease, width 0.3s ease;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(90deg, #FFC184, #ff6b6bc9);
+  border-radius: 10px;
+  transition: transform 300ms ease-in-out;
+  transform: scaleX(0);
+  transform-origin: right;
+  z-index: -1;
+}
+
+.btn:hover::before,
+.btn:focus::before {
+  transform: scaleX(1);
+}
+
+/* Página de cadastro de usúario */
+#userSignUpMain {
+  min-height: 90vh;
+}
+#userSignUpCtn {
+  height: 700px;
+}
+#adminCheck {
+  display: block;
+  margin-left: 10px;
+}
+
+/* Página de edição de artigo */
+#updateArtMain {
+  min-height: 135vh;
+}
+#updateArtCtn {
+  height: 1150px;
+}
+.updateImg {
+  width: 25%;
+}
+.updateImg img {
+  width: 100%;
+}
+
+/* Página de edição de usuário */
+#editUserCheck {
+  justify-content: space-evenly;
+}

@@ -9,8 +9,6 @@
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <script src="../app.js" defer></script>
   <title>Kpop Event</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 
 <body>
@@ -64,45 +62,41 @@
           <%=article.kb_body%>
         </p>
         <section class="imgContainer">
-          <img src="<%= article.kb_image%>" alt="">
+          <img src="<%= article.kb_image%>">
         </section>
       </section>
-      <section class="publishContainer">
-        <span>
-          <%=article.kb_published_date%>
-        </span>
-        <span>
-          <%=article.kb_author_email%>
-        </span>
-      </section>
-      <section class="likeContainer">
-        <span>
-          <%=article.kb_liked_count%>
-        </span>
-        <form action="/article/like/<%= article.kb_id %>" method="POST">
-          <button type="submit">
-            <i class='bx bxs-heart bx-sm'></i>
-          </button>
-        </form>
+      <section>
+        <section class="publishContainer">
+          <span>
+            <%=article.kb_published_date%>
+          </span>
+          <span>
+            <%=article.kb_author_email%>
+          </span>
+          <span>
+            <%=article.kb_author_name%>
+          </span>
+        </section>
+        <section class="likeContainer">
+          <span>
+            <%=article.kb_liked_count%>
+          </span>
+          <form action="/article/like/<%= article.kb_id %>" method="POST">
+            <button type="submit">
+              <i class='bx bxs-heart bx-sm'></i>
+            </button>
+          </form>
+        </section>
       </section>
     </section>
   </main>
   <footer>
-    <section class="midiaContainer">
-      <a href="#" target="_blank">
-        p
-        <img src="" alt="">
-      </a>
-      <a href="#" target="_blank">
-        p
-        <img src="" alt="">
-      </a>
-      <a href="#" target="_blank">
-        p
-        <img src="" alt="">
-      </a>
+    <section>
+      <i class='bx bxl-twitter bx-md'></i>
+      <i class='bx bxl-instagram bx-md'></i>
+      <i class='bx bxl-youtube bx-md'></i>
     </section>
-    <p>Todos os direitos reservados 2023</p>
+    <p>Todos os direitos reservados © 2023</p>
   </footer>
 </body>
 

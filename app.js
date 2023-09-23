@@ -23,11 +23,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
-// app.use(express.static('views'));
-// app.use('/', express.static('index.html'));
-// app.use('/login', express.static('login.html'));
-// app.use('/createArticle', express.static('createArticle.html'));
-// app.use('/admin', express.static('admin.html'));
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, './public/views'));

@@ -1,52 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Usuário</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles/global.css">
+  <link rel="stylesheet" href="../styles/signup.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <title>Kpop Event</title>
 </head>
+
 <body>
-  <a href="/admin">Voltar</a>
-  <a href="/">Home</a>
-
-  <% if (!user) { %>
-    <!-- Mostrar apenas quando o usuário NÃO estiver logado -->
-    <a href="/login">
-      <li>
-        Login
-      </li>
-    </a>
-  <% } else { %>
-    <!-- Mostrar apenas quando o usuário estiver logado -->
-    <a href="/admin">
-      <li>
-        Admin
-      </li>
-    </a>
-    <a href="/login/logout">
-      <li>
-        Logout
-      </li>
-    </a>
-  <% } %>
-    <h1>Cadastro de Usuário</h1>
-    <form action="/users/signup" method="post">
-        <label for="author_name">Nome:</label>
-        <input type="text" id="author_name" name="author_name" required><br>
-
-        <label for="author_email">Email:</label>
-        <input type="email" id="author_email" name="author_email" required><br>
-
-        <label for="author_user">Nome de Usuário:</label>
-        <input type="text" id="author_user" name="author_user" required><br>
-
-        <label for="author_pwd">Senha:</label>
-        <input type="password" id="author_pwd" name="author_pwd" required><br>
-
-        <label for="admin">Admin:</label>
-        <input type="checkbox" id="admin" name="admin" value="admin">         
-
-        <input type="submit" value="Cadastrar">
-    </form>
+  <header>
+    <section class="headerContainer">
+      <section class="logo">
+        <img src="" alt="">
+        <h1>KPOP</h1>
+        <h1 id="event">EVENT</h1>
+      </section>
+      <section class="navContainer">
+        <nav>
+          <ul>
+            <a href="/">
+              <li>
+                Home
+              </li>
+            </a>
+            <% if (!user) { %>
+              <a href="/login">
+                <li>
+                  Login
+                </li>
+              </a>
+              <% } else { %>
+                <a href="/login/logout">
+                  <li>
+                    Logout
+                  </li>
+                </a>
+                <a href="/admin">
+                  <li>
+                    Voltar
+                  </li>
+                </a>
+                <% } %>
+          </ul>
+        </nav>
+      </section>
+    </section>
+  </header>
+  <main id="userSignUpMain">
+    <article class="container" id="userSignUpCtn">
+      <form action="/users/signup" method="post">
+        <h1>Cadastro de Usuário</h1>
+        <section class="inputBox">
+          <input type="text" id="author_name" name="author_name" required>
+          <label for="author_name">Nome:</label>
+        </section>
+        <section class="inputBox">
+          <input type="email" id="author_email" name="author_email" required>
+          <label for="author_email">Email:</label>
+        </section>
+        <section class="inputBox">
+          <input type="text" id="author_user" name="author_user" required>
+          <label for="author_user">Nome de Usuário:</label>
+        </section>
+        <section class="inputBox">
+          <input type="password" id="author_pwd" name="author_pwd" required>
+          <label for="author_pwd">Senha:</label>
+        </section>
+        <section class="check" id="adminCheck">
+          <label for="admin">Admin:</label>
+          <input type="checkbox" id="admin" name="admin" value="admin">
+        </section>
+        <button type="submit" class="btn">Cadastrar</button>
+      </form>
+    </article>
+  </main>
+  <footer>
+    <section>
+      <i class='bx bxl-twitter bx-md'></i>
+      <i class='bx bxl-instagram bx-md'></i>
+      <i class='bx bxl-youtube bx-md'></i>
+    </section>
+    <p>Todos os direitos reservados © 2023</p>
+  </footer>
 </body>
+
 </html>

@@ -18,10 +18,11 @@ main {
   background-color: #FFF;
   border-radius: 10px;
   margin-top: 50px;
+  gap: 200px;
 }
 
 .infoContainer {
-  min-width: 80%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,7 +53,8 @@ main {
 }
 
 .imgContainer img {
-  max-width: 100%;
+  max-width: 70%;
+  margin-left: 15%;
 }
 
 .publishContainer {
@@ -66,17 +68,17 @@ main {
 .likeContainer {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 10px;
   margin: 15px 0px;
+  padding: 15px 0;
 }
 
 .likeContainer span {
   font-size: 1.2rem;
 }
 
-/* Botão */
 button {
   padding: 5px 10px;
   color: #000;

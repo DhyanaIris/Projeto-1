@@ -1,64 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro de Artigos</title>
+  <link rel="stylesheet" href="../styles/global.css">
+  <link rel="stylesheet" href="../styles/signup.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <title>Kpop Event</title>
 </head>
 
 <body>
-  <a href="/admin">Voltar</a>
-  <a href="/">Home</a>
-
-  <% if (!user) { %>
-    <!-- Mostrar apenas quando o usuário NÃO estiver logado -->
-    <a href="/login">
-      <li>
-        Login
-      </li>
-    </a>
-  <% } else { %>
-    <!-- Mostrar apenas quando o usuário estiver logado -->
-    <a href="/admin">
-      <li>
-        Admin
-      </li>
-    </a>
-    <a href="/login/logout">
-      <li>
-        Logout
-      </li>
-    </a>
-  <% } %>
-  
-  <h1>Cadastro de Artigos</h1>
-  <form action="/article/createArticle" method="post" enctype="multipart/form-data">
-    <label for="kb_title">Título:</label>
-    <input type="text" id="kb_title" name="kb_title" ><br>
-
-    <label for="kb_title">Resumo:</label>
-    <input type="text" id="kb_summary" name="kb_summary" ><br>
-
-    <label for="kb_body">Conteúdo:</label>
-    <textarea id="kb_body" name="kb_body" ></textarea><br>
-
-    <label for="kb_keywords">Palavras-chave:</label>
-    <input type="text" id="kb_keywords" name="kb_keywords" ><br>
-
-    <label for="kb_author_email">Email do Autor:</label>
-    <input type="email" id="kb_author_email" name="kb_author_email" value="<%= req.session.user.author_email %>" readonly>
-
-
-  <% if (user && user.author_level === 'admin') { %>
-    <label for="kb_featured">Destaque:</label>
-    <input type="checkbox" id="kb_featured" name="kb_featured" value="true">
-  <% } %>
-
-    <label for="kb_image">Imagem:</label>
-    <input type="file" id="kb_image" name="kb_image" accept="image/*"><br>
-
-  <input type="submit" value="Cadastrar">
-  </form>
+  <header>
+    <section class="headerContainer">
+      <section class="logo">
+        <img src="" alt="">
+        <h1>KPOP</h1>
+        <h1 id="event">EVENT</h1>
+      </section>
+      <section class="navContainer">
+        <nav>
+          <ul>
+            <a href="/">
+              <li>
+                Home
+              </li>
+            </a>
+            <% if (!user) { %>
+              <a href="/login">
+                <li>
+                  Login
+                </li>
+              </a>
+              <% } else { %>
+                <a href="/login/logout">
+                  <li>
+                    Logout
+                  </li>
+                </a>
+                <a href="/admin">
+                  <li>
+                    Voltar
+                  </li>
+                </a>
+                <% } %>
+          </ul>
+        </nav>
+      </section>
+    </section>
+  </header>
+  <main>
+    <article class="container">
+      <form action="/article/createArticle" method="post" enctype="multipart/form-data">
+        <h1>Cadastro de Artigos</h1>
+        <section class="inputBox">
+          <input type="text" id="kb_title" name="kb_title" required>
+          <label for="kb_title">Título:</label>
+        </section>
+        <section class="inputBox">
+          <input type="text" id="kb_summary" name="kb_summary" required>
+          <label for="kb_title">Resumo:</label>
+        </section>
+        <section class="inputBox">
+          <input type="text" id="kb_keywords" name="kb_keywords" required>
+          <label for="kb_keywords">Palavras-chave:</label>
+        </section>
+        <section class="inputBox">
+          <input type="email" id="kb_author_email" name="kb_author_email" value="<%= req.session.user.author_email %>"
+            readonly>
+          <label for="kb_author_email" id="kb_author_email">Email do Autor:</label>
+        </section>
+        <section class="check">
+          <% if (user && user.author_level==='admin' ) { %>
+            <section>
+              <label for="kb_featured">Destaque:</label>
+              <input type="checkbox" id="kb_featured" name="kb_featured" value="true">
+            </section>
+            <% } %>
+              <section>
+                <label for="kb_image">Imagem:</label>
+                <input type="file" id="kb_image" name="kb_image" accept="image/*">
+              </section>
+        </section>
+        <section class="contentText">
+          <label for="kb_body">Conteúdo:</label>
+          <textarea id="kb_body" name="kb_body"></textarea>
+        </section>
+        <button type="submit" class="btn">Cadastrar</button>
+      </form>
+    </article>
+  </main>
+  <footer>
+    <section>
+      <i class='bx bxl-twitter bx-md'></i>
+      <i class='bx bxl-instagram bx-md'></i>
+      <i class='bx bxl-youtube bx-md'></i>
+    </section>
+    <p>Todos os direitos reservados © 2023</p>
+  </footer>
 </body>
 
 </html>
