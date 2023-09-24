@@ -3,7 +3,7 @@ main {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  min-height: 110vh;
+  min-height: 140vh;
   background: rgb(168,118,230);
   background: linear-gradient(90deg, rgba(168,118,230,1) 0%, rgba(255,209,102,1) 50%, rgba(255, 107, 107, 0.788) 100%);
 }
@@ -155,7 +155,7 @@ label {
 
 /* Página de cadastro de usúario */
 #userSignUpMain {
-  min-height: 90vh;
+  min-height: 110vh;
 }
 #userSignUpCtn {
   height: 700px;
@@ -167,7 +167,7 @@ label {
 
 /* Página de edição de artigo */
 #updateArtMain {
-  min-height: 135vh;
+  min-height: 175vh;
 }
 #updateArtCtn {
   height: 1150px;
