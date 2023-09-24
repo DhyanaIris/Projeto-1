@@ -3,11 +3,11 @@ const router = express.Router();
 const fs = require("fs");
 const requireAuth = require('../middlewares/authenticator');
 
-let articles = []; // Defina a variável articles no escopo do módulo
+let articles = []; // Define a variável articles no escopo do módulo
 let users = [];
 
 
-// Verifique se o arquivo JSON existe e leia os artigos
+// Verifica se o arquivo JSON existe e le os artigos
 if (fs.existsSync("./data/articles.json")) {
   try {
     const data = fs.readFileSync("./data/articles.json", "utf8");
@@ -19,7 +19,7 @@ if (fs.existsSync("./data/articles.json")) {
   }
 }
 
-// Verifique se o arquivo JSON de usuários existe e leia os usuários
+// Verifica se o arquivo JSON de usuários existe e le os usuários
 if (fs.existsSync("./data/users.json")) {
   try {
     const data = fs.readFileSync("./data/users.json", "utf8");
@@ -36,10 +36,10 @@ router.get("/", requireAuth, (req, res) => {
   let filteredArticles = [];
 
   if (user.author_level === "admin") {
-    // Se o usuário for admin, exiba todos os artigos
+    // Se o usuário for admin, exibe todos os artigos
     filteredArticles = articles;
   } else {
-    // Caso contrário, exiba apenas os artigos do usuário logado
+    // Se não for admin exibe apenas os artigos do usuário logado
     filteredArticles = articles.filter((article) => article.kb_author_email === user.author_email);
   }
   res.render("admin", { articles: filteredArticles, users, user });

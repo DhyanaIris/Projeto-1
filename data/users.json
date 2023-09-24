@@ -1,7 +1,7 @@
 [
   {
     "author_id": "9d8f6481-ab0f-4dfc-82ea-e6fd1fdf6040",
-    "author_name": "TE5434",
+    "author_name": "admin",
     "author_email": "admin@admin.com",
     "author_user": "admin",
     "author_pwd": "admin",
@@ -13,7 +13,7 @@
     "author_name": "user",
     "author_email": "da@dsa.dsa",
     "author_user": "user",
-    "author_pwd": "123",
+    "author_pwd": "user",
     "author_level": "user",
     "author_status": "on"
   }

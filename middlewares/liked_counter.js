@@ -12,7 +12,7 @@ function updateLikeCount(req, res, next) {
       return res.status(500).send('Erro interno do servidor');
     }
   
-    // Encontre o artigo com base no ID
+    // Encontra o artigo com base no ID
     const article = articlesData.find((article) => article.kb_id === articleId);
   
     if (!article) {

@@ -18,18 +18,18 @@ router.get("/logout", (req,res) => {
    res.redirect('/login');
 })
 
-// autenticação
+// Autenticação
 function login(req, res, next) {
   const { username, password } = req.body;
-  // Verificar se o usuário e a senha correspondem a um usuário no JSON
+  // Verifica se o usuário e a senha correspondem a um usuário no JSON
   const user = users.find((user) => user.author_user === username && user.author_pwd === password);
   if (user && user.author_status === "on") {
-    // Autenticação bem-sucedida, armazenar na sessão
+    // Autenticação bem-sucedida, armazena na sessão
     req.session.authenticated = true;
     req.session.user = user;
     next();
   } else {
-    // Credenciais inválidas, redirecionar para a página de login
+    // Credenciais inválidas, redireciona para a página de login
     res.redirect('/login?error=1');
   }
 }

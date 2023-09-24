@@ -13,7 +13,7 @@ router.get("/createArticle", requireAuth, (req, res) => {
 });
 
 router.post("/createArticle", requireAuth, upload.single('kb_image'),(req, res) => {
-    // Receba os dados do formulário
+    // Recebe os dados do formulário
     const novoArtigo = req.body;
   
     novoArtigo.kb_author_id = req.session.user.author_id;
@@ -35,7 +35,7 @@ router.post("/createArticle", requireAuth, upload.single('kb_image'),(req, res) 
   
     const artigoOrdenado = ordenarProps(novoArtigo);
   
-    // Carregue os artigos existentes (se houver)
+    // Carrega os artigos existentes (se houver)
     let articles = [];
     if (fs.existsSync("./data/articles.json")) {
       try {
@@ -45,7 +45,7 @@ router.post("/createArticle", requireAuth, upload.single('kb_image'),(req, res) 
         console.error("Erro ao analisar o arquivo JSON:", error);
       }
     }
-    // Adicione o novo artigo à lista de artigos
+    // Adiciona o novo artigo à lista de artigos
     articles.push(artigoOrdenado);
   
     // Salva a lista de artigos no arquivo JSON
@@ -69,7 +69,7 @@ router.get('/:id', (req, res) => {
       const data = fs.readFileSync('./data/articles.json', 'utf8');
       articlesData = JSON.parse(data);
     
-      // Encontre o artigo com base no ID
+      // Encontra o artigo com base no ID
       const article = articlesData.find((article) => article.kb_id === articleId);
     
       if (!article) {
@@ -82,29 +82,29 @@ router.get("/updateArticle/:kb_id", requireAuth, (req, res) => {
   const kbId = req.params.kb_id;
   let user = req.session.user;
 
-  // Verifique se o arquivo JSON existe
+  // Verifica se o arquivo JSON existe
   if (fs.existsSync("./data/articles.json")) {
     try {
-      // Leia o arquivo JSON apenas se ele não estiver vazio
+      // Lê o arquivo JSON apenas se ele não estiver vazio
       const data = fs.readFileSync("./data/articles.json", "utf8");
 
       if (data) {
         const articles = JSON.parse(data);
 
-        // Encontre o artigo com base no kb_id
+        // Encontra o artigo com base no ID
         const articleUpdate = articles.find((article) => article.kb_id === kbId);
 
         if (articleUpdate) {
-          // Verifique se o usuário é o autor do artigo ou se é um administrador
+          // Verifica se o usuário é o autor do artigo ou se é um administrador
           if (user.author_id === articleUpdate.kb_author_id || user.author_level === 'admin') {
-            // O usuário tem permissão para editar o artigo, renderize a página de edição
+            // Se usuário tem permissão para editar o artigo, renderiza a página de edição
             res.render("updateArticle", { articleUpdate, user });
           } else {
-            // O usuário não tem permissão para editar o artigo, redirecione ou exiba uma mensagem de erro
+            // Se o usuário não tem permissão para editar o artigo, exibe uma mensagem de erro
             res.status(403).send("Permissão negada");
           }
         } else {
-          // Artigo não encontrado, redirecione ou exiba uma mensagem de erro
+          // Artigo não encontrado, exibe uma mensagem de erro
           res.status(404).send("Artigo não encontrado");
       }
     }
@@ -114,20 +114,20 @@ router.get("/updateArticle/:kb_id", requireAuth, (req, res) => {
   }
 });
 
-// Defina a rota para lidar com a atualização do artigo
+// Define a rota para lidar com a atualização do artigo
 router.post("/updateArticle/:kb_id", requireAuth, upload.single('kb_image'), (req, res) => {
   const kbId = req.params.kb_id;
   const updatedArticle = req.body;
   let user = req.session.user
 
-  // Verifique se o arquivo JSON existe
+  // Verifica se o arquivo JSON existe
   if (fs.existsSync("./data/articles.json")) {
     try {
-      // Leia o arquivo JSON
+      // Lê o arquivo JSON
       const data = fs.readFileSync("./data/articles.json", "utf8");
       let articles = JSON.parse(data);
 
-      // Encontre o artigo a ser atualizado pelo kb_id
+      // Encontra o artigo a ser atualizado pelo ID
       const foundArticleIndex = articles.findIndex((article) => article.kb_id === kbId);
 
       if (foundArticleIndex !== -1) {
@@ -142,16 +142,16 @@ router.post("/updateArticle/:kb_id", requireAuth, upload.single('kb_image'), (re
           foundArticle.kb_author_email = updatedArticle.kb_author_email;
           foundArticle.kb_featured = updatedArticle.kb_featured === 'true';
         
-        // Verifique se uma nova imagem foi enviada
+        // Verifica se uma nova imagem foi enviada
         if (req.file) {
           foundArticle.kb_image = `../img/${req.file.filename}`;
         }
       }
 
-        // Salve o artigo atualizado de volta à lista
+        // Salva o artigo atualizado de volta à lista
         articles[foundArticleIndex] = foundArticle;
 
-        // Salve os artigos atualizados no arquivo JSON (substituindo o arquivo antigo)
+        // Salva os artigos atualizados no arquivo JSON (substituindo o arquivo antigo)
         fs.writeFileSync("./data/articles.json", JSON.stringify(articles, null, 2));
       }
     } catch (error) {
@@ -159,30 +159,30 @@ router.post("/updateArticle/:kb_id", requireAuth, upload.single('kb_image'), (re
     }
   }
 
-  // Redirecione de volta para a página de administração ou para a página de leitura do artigo atualizado
+  // Redireciona de volta para a página de administração
   res.redirect('/admin');
 });
 
 router.get("/delete/:kb_id", requireAuth, (req, res) => {
   const kbId = req.params.kb_id;
 
-  // Verifique se o arquivo JSON existe
+  // Verifica se o arquivo JSON existe
   if (fs.existsSync("./data/articles.json")) {
     try {
-      // Leia o arquivo JSON apenas se ele não estiver vazio
+      // Lê o arquivo JSON apenas se ele não estiver vazio
       const data = fs.readFileSync("./data/articles.json", "utf8");
 
       if (data) {
         let articles = JSON.parse(data);
 
-        // Encontre o índice do artigo a ser excluído
+        // Encontra o índice do artigo a ser excluído
         const articleIndex = articles.findIndex((article) => article.kb_id === kbId);
 
         if (articleIndex !== -1) {
-          // Remova o artigo da lista de artigos
+          // Remove o artigo da lista de artigos
           articles.splice(articleIndex, 1);
 
-          // Salve a lista de artigos atualizada no arquivo JSON (sem o artigo excluído)
+          // Salva a lista de artigos atualizada no arquivo JSON (sem o artigo excluído)
           fs.writeFileSync("./data/articles.json", JSON.stringify(articles, null, 2));
         }
       }
@@ -191,7 +191,7 @@ router.get("/delete/:kb_id", requireAuth, (req, res) => {
     }
   }
 
-  // Redirecione de volta para a página de administração após a exclusão
+  // Redireciona de volta para a página de administração após a exclusão
   res.redirect('/admin');
 });
 

@@ -5,13 +5,13 @@
     "kb_id": "cfa4befd-f7fb-4fb4-b4d2-014467e21e09",
     "kb_title": "Teste",
     "kb_summary": "Teste",
-    "kb_body": "blablablablablablablabla",
+    "kb_body": "            blablablablablablablabla\r\n          ",
     "kb_keywords": "bla",
     "kb_author_email": "admin@admin.com",
     "kb_published_date": "21/09/2023",
     "kb_published": true,
-    "kb_liked_count": 0,
-    "kb_featured": false,
+    "kb_liked_count": 2,
+    "kb_featured": true,
     "kb_image": "../img/f5625f66-1046-41cb-81d6-1130d4c0ba82.webp"
   },
   {
@@ -25,23 +25,8 @@
     "kb_author_email": "da@dsa.dsa",
     "kb_published_date": "21/09/2023",
     "kb_published": true,
-    "kb_liked_count": 0,
+    "kb_liked_count": 3,
     "kb_featured": true,
     "kb_image": "../img/4ddbc73a-2fbe-49aa-9a7b-cb675c4e44d3.webp"
-  },
-  {
-    "kb_author": "TE5434",
-    "kb_author_id": "9d8f6481-ab0f-4dfc-82ea-e6fd1fdf6040",
-    "kb_id": "90dc0cdf-dca0-4ec9-87a6-6b15f3e5d70f",
-    "kb_title": "Teste Botão",
-    "kb_summary": "Seulgi linda maravilhosa",
-    "kb_body": "Seulgi foi vista toda linda em um evento de moda, porque ela pode ela é toda diva poderosa, nossa bear sempre arrassando! aaaaaaaaaaaaaaaaa a ffffffffffffffffffff ssssssssssss  dddddd ggggggggg jhhjash hjk ahsk jahuiqwgh banms bauige qwiub akdbagd qiwg qhb dasd auiwgeqge b shdbf efyug b kmbsdfi kguigqyuw avsdh vyiqefyq vahsv afg vqywge qyw bakf kdfhgiqgd  av ah qyeg quywvasdvajhfg uiq.",
-    "kb_keywords": "seulgi, red velet",
-    "kb_author_email": "admin@admin.com",
-    "kb_published_date": "23/09/2023",
-    "kb_published": true,
-    "kb_liked_count": 0,
-    "kb_featured": true,
-    "kb_image": "../img/8c225054-ddb2-48a8-afec-0ab7af4d3414.png"
   }
 ]

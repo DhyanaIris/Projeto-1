@@ -15,14 +15,14 @@ router.post("/signup", requireAuth, (req, res) => {
   // Receba os dados do formulário
   const novoUsuario = req.body;
 
-  // Defina o valor de "author_level" com base no estado do checkbox "admin"
+  // Define o valor de "author_level" com base no estado do checkbox "admin"
   novoUsuario.author_level = req.body.admin === "admin" ? "admin" : "user";
   novoUsuario.author_status = "on";
 
-  // Gere um ID único para o novo usuário
+  // Gera um ID único para o novo usuário
   novoUsuario.author_id = uuid.v4();
 
-  // Verifique se o arquivo JSON de usuários existe
+  // Verifica se o arquivo JSON de usuários existe
   if (fs.existsSync("./data/users.json")) {
     try {
       const data = fs.readFileSync("./data/users.json", "utf8");
@@ -33,16 +33,16 @@ router.post("/signup", requireAuth, (req, res) => {
     }
   }
 
-   // Ordene as propriedades do novo usuário
+   // Ordena as propriedades do novo usuário
    const usuarioOrdenado = ordenarPropsUsuario(novoUsuario);
 
-  // Adicione o novo usuário à lista de usuários
+  // Adiciona o novo usuário à lista de usuários
   users.push(usuarioOrdenado);
 
-  // Salve a lista de usuários no arquivo JSON
+  // Salva a lista de usuários no arquivo JSON
   fs.writeFileSync("./data/users.json", JSON.stringify(users, null, 2));
 
-  // Redirecione de volta para a página de cadastro de usuário ou para onde desejar
+  // Redireciona de volta para a página de cadastro de usuário
   res.redirect("/users/signup");
   
 });
@@ -65,21 +65,20 @@ router.get('/edit/:author_id', requireAuth, (req, res) => {
       // Analisa o arquivo JSON em um array de objetos de usuário
       const users = JSON.parse(data);
       
-      // Encontre o usuário com base no author_id
+      // Encontra o usuário com base no ID
       const author = users.find((author) => author.author_id === authorId);
 
       if (!user) {
-        // Usuário não encontrado, você pode lidar com isso da maneira que preferir
         res.status(404).send("Usuário não encontrado");
         return;
       }
 
-      // Verifique o nível de autorização do usuário autenticado
+      // Verifica o nível de autorização do usuário autenticado
       if (user.author_level === "admin") {
         // Renderiza a página de edição de usuário apenas se o usuário for "admin"
         res.render('editUser', { author, user });
       } else {
-      // Se o usuário não for "admin", redirecione ou exiba uma mensagem de erro
+      // Se o usuário não for "admin", exibe uma mensagem de erro
       res.status(403).send("Permissão negada.");
       }
       
@@ -107,11 +106,10 @@ router.post("/edit/:author_id", (req, res) => {
       // Analisa o arquivo JSON em um array de objetos de usuário
       const users = JSON.parse(data);
       
-      // Encontra o índice do usuário com base no author_id
+      // Encontra o índice do usuário com base no ID
       const userIndex = users.findIndex((user) => user.author_id === authorId);
       
       if (userIndex === -1) {
-        // Usuário não encontrado, você pode lidar com isso da maneira que preferir
         res.status(404).send("Usuário não encontrado");
         return;
       }
@@ -126,18 +124,18 @@ router.post("/edit/:author_id", (req, res) => {
       foundUser.author_user = updatedUser.author_user || foundUser.author_user;
       foundUser.author_pwd = updatedUser.author_pwd || foundUser.author_pwd;
       
-      // Verifique se o checkbox "Admin" está marcado ou não
+      // Verifica se o checkbox "Admin" está marcado ou não
       if (req.body.author_level === "admin") {
-        foundUser.author_level = "admin"; // Se estiver marcado, defina como "admin"
+        foundUser.author_level = "admin"; // Se estiver marcado, define como "admin"
       } else {
-        foundUser.author_level = "user"; // Se não estiver marcado, defina como "user"
+        foundUser.author_level = "user"; // Se não estiver marcado, define como "user"
       }
 
-      // Verifique se o checkbox "Ativo" está marcado ou não
+      // Verifica se o checkbox "Ativo" está marcado ou não
       if (updatedUser.author_status === "on") {
-        foundUser.author_status = "on"; // Se estiver marcado, defina como "on"
+        foundUser.author_status = "on"; // Se estiver marcado, define como "on"
       } else {
-        foundUser.author_status = "off"; // Se não estiver marcado, defina como "off"
+        foundUser.author_status = "off"; // Se não estiver marcado, define como "off"
       }
       
       // Salva o array de usuários de volta no arquivo JSON

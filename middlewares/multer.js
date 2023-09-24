@@ -4,11 +4,11 @@ const uuid = require('uuid');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './public/img'); // O diretório onde você deseja salvar as imagens
+    cb(null, './public/img'); // Diretório onde as imagens são salvas
   },
   filename: function (req, file, cb) {
     const ext = path.extname(file.originalname);
-    const uniqueFileName = uuid.v4() + ext; // Use um nome único para cada imagem
+    const uniqueFileName = uuid.v4() + ext; // Usa um nome único para cada imagem
     cb(null, uniqueFileName);
   },
 });
