@@ -75,7 +75,7 @@
               <a href="/article/<%= article.kb_id %>">
                 <section class="newsContainer">
                   <section class="imgContainer">
-                    <img src="../img/bg.jpg" alt="" class="">
+                    <img src="<%= article.kb_image || '../img/default.jpg' %>" alt="">                  
                   </section>
                   <article class="infoContainer">
                     <h3>
@@ -100,7 +100,7 @@
             <a href="/article/<%= article.kb_id %>">
               <section class="newsContainer">
                 <section class="imgContainer">
-                  <img src="../img/bg.jpg" alt="" class="">
+                  <img src="<%= article.kb_image || '../img/default.jpg' %>" alt="">  
                 </section>
                 <article class="infoContainer">
                   <h3>
