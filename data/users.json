@@ -1,19 +1,19 @@
 [
   {
-    "author_id": "9d8f6481-ab0f-4dfc-82ea-e6fd1fdf6040",
+    "author_id": "62de006f-01dd-42b3-ab82-e67de403a755",
     "author_name": "admin",
     "author_email": "admin@admin.com",
     "author_user": "admin",
-    "author_pwd": "admin",
+    "author_pwd": "$2b$10$pdZgvQQChALRDPrl54Ba7O/Eo0uBFcjBh6EuJ28/XbJb3FfASAhRa",
     "author_level": "admin",
     "author_status": "on"
   },
   {
-    "author_id": "429a07e7-5caa-43c0-b6a5-a0d0c1d30542",
+    "author_id": "d04b5e65-3338-4a4b-97a2-e29c3b40ff70",
     "author_name": "user",
     "author_email": "user@user.com",
     "author_user": "user",
-    "author_pwd": "user",
+    "author_pwd": "$2b$10$e/EVSwPQG2TbeggH2VsBnOnjcz3d8XETkZQ/69f2lOVapS/PhH.zi",
     "author_level": "user",
     "author_status": "on"
   }

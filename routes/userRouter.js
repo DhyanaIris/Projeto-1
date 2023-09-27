@@ -1,7 +1,8 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 const fs = require('fs');
-const uuid = require("uuid");
+const uuid = require('uuid');
+const bcrypt = require('bcrypt')
 const requireAuth = require('../middlewares/authenticator');
 
 // Rota para exibir o formulário de cadastro de usuário
@@ -11,7 +12,7 @@ router.get("/signup", requireAuth, (req, res) => {
 });
 
 // Rota para lidar com o envio do formulário de cadastro de usuário
-router.post("/signup", requireAuth, (req, res) => {
+router.post("/signup", requireAuth, async (req, res) => {
   // Receba os dados do formulário
   const novoUsuario = req.body;
 
@@ -22,11 +23,23 @@ router.post("/signup", requireAuth, (req, res) => {
   // Gera um ID único para o novo usuário
   novoUsuario.author_id = uuid.v4();
 
+  // Hash da senha
+  const hashedPassword = await hashPassword(novoUsuario.author_pwd);
+  novoUsuario.author_pwd = hashedPassword;
+  
   // Verifica se o arquivo JSON de usuários existe
   if (fs.existsSync("./data/users.json")) {
     try {
       const data = fs.readFileSync("./data/users.json", "utf8");
       users = JSON.parse(data);
+
+      // Verifica se já existe um usuário com o mesmo "author_user"
+      const usuarioExistente = users.find((user) => user.author_user === novoUsuario.author_user);
+
+      if (usuarioExistente) {
+        // Se um usuário com o mesmo "author_user" já existe, retorne um erro ou redirecione para uma página de erro
+        return res.status(400).send("Esse nome de usuário já existe");
+      }
 
     } catch (error) {
       console.error("Erro ao analisar o arquivo JSON de usuários:", error);
@@ -75,8 +88,11 @@ router.get('/edit/:author_id', requireAuth, (req, res) => {
 
       // Verifica o nível de autorização do usuário autenticado
       if (user.author_level === "admin") {
+
+        let senha = author.author_pwd;
+
         // Renderiza a página de edição de usuário apenas se o usuário for "admin"
-        res.render('editUser', { author, user });
+        res.render('editUser', { author,senha, user });
       } else {
       // Se o usuário não for "admin", exibe uma mensagem de erro
       res.status(403).send("Permissão negada.");
@@ -90,12 +106,12 @@ router.get('/edit/:author_id', requireAuth, (req, res) => {
 });
 
 // Rota para lidar com a atualização do usuário
-router.post("/edit/:author_id", (req, res) => {
+router.post("/edit/:author_id", async (req, res) => {
   const authorId = req.params.author_id;
   const updatedUser = req.body;
   
   // Lê o arquivo JSON de usuários
-  fs.readFile("./data/users.json", "utf8", (err, data) => {
+  fs.readFile("./data/users.json", "utf8", async(err, data) => {
     if (err) {
       console.error("Erro ao ler o arquivo JSON de usuários:", err);
       res.status(500).send("Erro interno do servidor");
@@ -123,6 +139,12 @@ router.post("/edit/:author_id", (req, res) => {
       foundUser.author_email = updatedUser.author_email || foundUser.author_email;
       foundUser.author_user = updatedUser.author_user || foundUser.author_user;
       foundUser.author_pwd = updatedUser.author_pwd || foundUser.author_pwd;
+
+      // Verifica se a nova senha foi fornecida e a criptografa
+      if (updatedUser.author_pwd) {
+        const hashedPassword = await hashPassword(updatedUser.author_pwd);
+        foundUser.author_pwd = hashedPassword;
+      }
       
       // Verifica se o checkbox "Admin" está marcado ou não
       if (req.body.author_level === "admin") {
@@ -155,6 +177,13 @@ router.post("/edit/:author_id", (req, res) => {
     }
   });
 });
+
+// Função para gerar um hash de senha
+async function hashPassword(password) {
+  const saltRounds = 10; // Número de saltos a serem usados
+  const hashedPassword = await bcrypt.hash(password, saltRounds);
+  return hashedPassword;
+}
 
 
 function ordenarPropsUsuario(obj) {
